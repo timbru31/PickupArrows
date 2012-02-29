@@ -13,7 +13,7 @@ for the arrow to be made pickup-able.
 *Note: If there is a player with the appropriate permissions in range, the arrow is
 collectable by anyone. This plugin does not allow control of who can pickup the arrows.*
 
-range (10.0): Size of the bounding box, in meters, a player must be from the skeleton
+range (10.0): Size of the bounding box, in meters, a player must be from the shooter
 in order to change the arrow pickupability.
 
 debug (false): Set to true for debug messages.

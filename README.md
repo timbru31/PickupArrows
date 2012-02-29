@@ -21,4 +21,11 @@ debug (false): Set to true for debug messages.
 ## Permissions
 pickuparrows.allow (false): Allows you to pickup arrows you normally would not be able to
 
+## Notes
+Requested on Bukkit plugin requests forum here: [Pickup Skeleton Arrows](http://forums.bukkit.org/threads/pickup-skeleton-arrows.57424/)
+
+and on MC Port Central here: [REQ Immibis Mods](http://www.mcportcentral.co.za/index.php?topic=1609.0)
+
+This plugin is similar to the [Pickuppable Skeleton Arrows](http://www.minecraftforum.net/topic/1001131-110-immibiss-mods-smp/) mod by immibis, 
+but shares no code, and was written from scratch.
 

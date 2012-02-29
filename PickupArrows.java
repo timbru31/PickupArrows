@@ -27,40 +27,42 @@ class PickupArrowsListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityShootBow(EntityShootBowEvent event) {
 		Entity projectile = event.getProjectile();
-		if (!(projectile instanceof Arrow)) {
+		if (projectile == null || !(projectile instanceof Arrow)) {
 			return;
 		}
 		Arrow arrow = (Arrow)projectile;
 
 		Entity shooter = event.getEntity();
-		if (shooter instanceof Skeleton || !plugin.getConfig().getBoolean("skeletonsOnly", true)) {
-			plugin.log("shot by "+shooter);
-
-            // anyone can pickup
-            if (!plugin.getConfig().getBoolean("usePermissions", false)) {
-                plugin.log("allowed by configuration");
-                setAllowPickup(arrow);
+		if (plugin.getConfig().getBoolean("skeletonsOnly", true)) {
+            if (shooter == null || !(shooter instanceof Skeleton)) {
                 return;
             }
+        }
 
-            // otherwise, check if anyone nearby is allowed
-			double r = plugin.getConfig().getDouble("range", 10.0);
-			List<Entity> nearbyEntities = shooter.getNearbyEntities(r, r, r);
-			for (Entity nearbyEntity: nearbyEntities) {
-				if (nearbyEntity instanceof Player) {
-					Player player = (Player)nearbyEntity;
+        // anyone can pickup
+        if (!plugin.getConfig().getBoolean("usePermissions", false)) {
+            plugin.log("allowed by configuration");
+            setAllowPickup(arrow);
+            return;
+        }
 
-					if (player.hasPermission("pickuparrows.allow")) {
-						plugin.log("allowed by permissions of "+player.getName());
-                        setAllowPickup(arrow);
-						return;
-					} else {
-                        plugin.log("no permission from "+player.getName());
-                    }
-				}
-			}
-			plugin.log("not allowed");
-		}
+        // otherwise, check if anyone nearby is allowed
+        double r = plugin.getConfig().getDouble("range", 10.0);
+        List<Entity> nearbyEntities = shooter.getNearbyEntities(r, r, r);
+        for (Entity nearbyEntity: nearbyEntities) {
+            if (nearbyEntity instanceof Player) {
+                Player player = (Player)nearbyEntity;
+
+                if (player.hasPermission("pickuparrows.allow")) {
+                    plugin.log("allowed by permissions of "+player.getName());
+                    setAllowPickup(arrow);
+                    return;
+                } else {
+                    plugin.log("no permission from "+player.getName());
+                }
+            }
+        }
+        plugin.log("not changed");
 	}
 
     public void setAllowPickup(Arrow arrow) {

@@ -4,9 +4,9 @@ version: 1.0
 permissions:
     pickuparrows.*:
         children:
-            pickuparrows.skeleton: true
+            pickuparrows.allow: true
         default: false
-    pickuparrows.skeleton:
-        description: Allows you to pickup arrows shot by nearby skeletons
-        default: op
+    pickuparrows.allow:
+        description: Allows you to pickup arrows you normally would not be able to
+        default: false
 

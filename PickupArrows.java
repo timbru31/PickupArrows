@@ -50,7 +50,7 @@ class PickupArrowsListener implements Listener {
 				if (nearbyEntity instanceof Player) {
 					Player player = (Player)nearbyEntity;
 
-					if (player.hasPermission("pickuparrows.skeleton")) {
+					if (player.hasPermission("pickuparrows.allow")) {
 						plugin.log("allowed by permissions of "+player.getName());
                         setAllowPickup(arrow);
 						return;

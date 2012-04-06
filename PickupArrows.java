@@ -25,14 +25,14 @@ class PickupArrowsListener implements Listener {
 	}
 
     @EventHandler(priority = EventPriority.NORMAL)
-	public void onEntityShootBow(EntityShootBowEvent event) {
-		Entity projectile = event.getProjectile();
+	public void onProjectileHitEvent(ProjectileHitEvent event) {
+		Projectile projectile = event.getEntity();
 		if (projectile == null || !(projectile instanceof Arrow)) {
 			return;
 		}
 		Arrow arrow = (Arrow)projectile;
 
-		Entity shooter = event.getEntity();
+		Entity shooter = projectile.getShooter();
 		if (plugin.getConfig().getBoolean("skeletonsOnly", true)) {
             if (shooter == null || !(shooter instanceof Skeleton)) {
                 return;

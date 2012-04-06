@@ -2,6 +2,8 @@ PickupArrows - pickup skeleton arrows
 
 A simple plugin to allow players to pickup arrows shot by skeletons.
 
+**[Download PickupArrows 1.2](http://dev.bukkit.org/server-mods/pickuparrows/files/3-pickup-arrows-1-2/)** - updated for 1.2.5-R1.0
+
 ## Configuration
 skeletonsOnly (true): If true, only affects arrows shot by skeletons. If false, all arrows
 are affected, including those shot by bows with the Infinity enchantment.

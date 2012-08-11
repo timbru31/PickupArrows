@@ -1,0 +1,4 @@
+skeletonsOnly: true
+usePermissions: false
+range: 10.0
+debug: false

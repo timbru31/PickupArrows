@@ -32,4 +32,3 @@ and on MC Port Central here: [REQ Immibis Mods](http://www.mcportcentral.co.za/i
 
 This plugin is similar to the [Pickuppable Skeleton Arrows](http://www.minecraftforum.net/topic/1001131-110-immibiss-mods-smp/) mod by immibis, 
 but shares no code, and was written from scratch.
-

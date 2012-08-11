@@ -1,0 +1,177 @@
+=== **PasswordProtect -**  Protect your server with a password\\
+=== **Version v1.1.2**\\
+=== **Old forum link: [[http://forums.bukkit.org/threads/75179/|Click!]]**\\
+
+
+=== **Description**
+
+This plugin is a rebirth of [[http://forums.bukkit.org/threads/9521/|PasswordProtect]]. All credits for the original plugin are going to  @[[http://forums.bukkit.org/members/disabledhamster.38632|DisabledHamster]].
+I'm glad you allowed me to fork it!
+Additionally I migrated some features of [[forums.bukkit.org/threads/27868/|mPasswordProtector]] into PasswordProtect (auto kick and ban)
+If you enter the server, you are forced to enter a password. If you enter it wrong to often, you are going to be kicked (and banned).
+Without entering the password you are able to walk in a configured jail area.
+Comes with a config, permissions & commands.
+It's possible to execute some custom commands, which can be configured.
+
+
+=== **Features**
+
+* Cancel different interaction events like
+** Pickup items
+** Drop items
+** Break blocks
+** Hit mobs or players
+** Chat
+** Triggering of mobs
+** Interaction with items
+** Using a portal
+** Drops on death
+** Flying
+* Auto kick and auto ban (even the IP) after configurable amount of tries
+* Blindness and slowness for the player if wanted
+* Jail area - the player is teleported back if he leaves the area
+* Per world jail area!
+* **Safe encryption** of password, choose between **SHA, SHA-256, SHA-512, MD5 & more**
+* Custom commands are allowed to execute (like /rules)
+* Bypass command via permission
+* Broadcast a message on kick/ban
+* Teleport the player back to the previous location (location on logout)
+* Localization to edit the messages
+* Permissions & Commands for an easy administration
+* **<<color red>>This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginMetrics/config.yml!<</color>>**
+
+=== **Config**
+
+<<code yaml>>
+# For help please refer to http://bit.ly/ppbukkit or http://bit.ly/ppbukkitdev
+encryption: SHA-256
+OpsRequirePassword: true
+cleanPassword: false
+password: ''
+passwordClean: ''
+prevent:
+  Movement: true
+  Interaction: true
+  InteractionMobs: true
+  ItemPickup: true
+  ItemDrops: true
+  Portal: true
+  BlockPlace: true
+  BlockBreak: true
+  Triggering: true
+  Attacks: true
+  Damage: true
+  Chat: true
+wrongAttempts:
+  kick: 3
+  ban: 5
+  banIP: true
+darkness: true
+slowness: true
+allowedCommands:
+- help
+- rules
+- motd
+teleportBack: true
+<</code>>
+
+
+=== **Commands & Permissions**
+
+Only the bukkit permissions are supported! I //highly// recommend, that you use a plugin for permissions like [[http://dev.bukkit.org/server-mods/bpermissions/|bPermissions]] or [[http://dev.bukkit.org/server-mods/permissionsex/|PermissionsEX (PEX)]]!!\\If the config value permission is set to false, all people can use the commands!\\
+If no permission system is found, all commands are for OPs only! Of course the console can use the commands, too!\\
+
+**Node: passwordprotect.nopassword**\\
+Description: Bypass the login password
+
+**/password**\\
+**Node: passwordprotect.getpassword**\\
+Description: Allows you to get the password
+
+**/setpassword <password>**\\
+**Node: passwordprotect.setpassword**\\
+Description: Allows you to set the password
+
+**/setjaillocation <radius>**\\
+**Aliases: /setjail, /setjailarea, /setpasswordjail**\\
+**Node: passwordprotect.setjailarea**\\
+Description: Allows you to set the jail area
+
+**/login <password>**\\
+**Node: No permission node**\\
+Description: Used to login.
+
+Of course you can use passwordprotect.*\\
+**But passwordprotect.nopassword is excluded!**
+
+=== **Download**
+
+<<center>><<color red>>**These downloads are optional! You can use them or the download button above!!!**<</color>><</center>>
+
+<<center>>{{http://img829.imageshack.us/img829/5058/mcabk.png}}<</center>>
+
+<<center>>If you want to help me to analyze the downloads please use these links, otherwise scroll down!<</center>>
+
+<<center>>{{http://img17.imageshack.us/img17/5563/dropbox.gif}}{{http://img717.imageshack.us/img717/8405/transparentrl.gif}}{{http://img600.imageshack.us/img600/1048/catkz.gif}}<</center>>
+
+<<center>>[[http://bit.ly/passprotectdropbox|Download]]{{http://img40.imageshack.us/img40/1839/transparent2.gif}}[[http://bit.ly/ppgithub|Download]]<</center>>
+<<center>>[[http://bit.ly/sourcepp|Source Code]]<</center>>
+
+<<center>>{{http://img833.imageshack.us/img833/3138/mca1.png}}<</center>>
+
+<<center>>Links without bit.ly (a.k.a direct links)! Sad that you don't want to support me in analyzing my links and downloads...<</center>>
+
+<<center>>{{http://img17.imageshack.us/img17/5563/dropbox.gif}}{{http://img717.imageshack.us/img717/8405/transparentrl.gif}}{{http://img600.imageshack.us/img600/1048/catkz.gif}}<</center>>
+
+<<center>>[[http://dl.dropbox.com/u/26476995/PasswordProtect.jar|Download]]{{http://img40.imageshack.us/img40/1839/transparent2.gif}}[[https://github.com/downloads/xGhOsTkiLLeRx/PasswordProtect/PasswordProtect.jar|Download]]<</center>>
+<<center>>[[https://github.com/xGhOsTkiLLeRx/PasswordProtect|Source Code]]<</center>>
+
+
+=== **Future Plans (a.k.a. ToDo):**
+
+* Nothing - I'm open for suggestions!
+
+**Make sure to take a look at the always up to date [[http://dl.dropbox.com/u/26476995/ToDo.pdf|ToDo]]!**
+
+=== **Known Bugs**
+
+* --If the server is /reload -ed, all active players can play without the password.-- **"Fixed" in 1.1**
+
+
+=== **Changelog**
+
+Version 1.1.2
+* Updated to support new chat event (bukkit 1.3 change)
+
+Version 1.1.1
+* Fixed a small bug where the jailedPlayers.dat wasn't generated in the right folder
+* Changed exception behavior a bit
+
+[[http://dev.bukkit.org/server-mods/passwordprotect/pages/changelog/|Long changelog]]
+
+
+=== **Credits**
+
+@[[http://forums.bukkit.org/members/disabledhamster.3962/|DisabledHamster]] for his original plugin! :)\\
+@[[http://forums.bukkit.org/members/muhum.103970/|muHum]] for mPasswordProtector
+
+
+=== **Banner**
+
+Feel free to use this banner!! :)
+
+{{http://dl.dropbox.com/u/26476995/passwordprotect_banner.png}}\\
+{{http://dl.dropbox.com/u/26476995/passwordprotect_banner_small.png}}
+
+
+=== **Donations**
+
+If you really like my plugin, you can **if you want** make a donation via PayPal!
+
+There is a button on top of this page :)
+
+
+=== **License**
+
+<<center>>This plugin is released under the **Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)** license!<</center>>
+<<center>>{{http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png}}<</center>>

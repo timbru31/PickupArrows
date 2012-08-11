@@ -8,6 +8,8 @@ public class PickupArrows extends JavaPlugin {
 	private final Logger log = Logger.getLogger("Minecraft");
 	public FileConfiguration config;
 
+	public void onDisable() {}
+	
 	public void onEnable() {
 		// Event
 		getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
@@ -21,8 +23,6 @@ public class PickupArrows extends JavaPlugin {
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
-
-	public void onDisable() {}
 
 	// Debug
 	public void log(String message) {

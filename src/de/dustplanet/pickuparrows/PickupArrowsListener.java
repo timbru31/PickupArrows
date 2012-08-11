@@ -11,6 +11,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
+/**
+ * PickupArrows for CraftBukkit/Bukkit
+ * Handles activities (ProjectileHit)!
+ * Refer to the forum thread:
+ * http://bit.ly/pathread
+ * Refer to the dev.bukkit.org page: http://bit.ly/papagedev
+ * 
+ * @author  xGhOsTkiLLeRx
+ * @thanks  to mushroomhostage for the original PickupArrows plugin!
+ */
+
 public class PickupArrowsListener implements Listener {
 	
 	private PickupArrows plugin;

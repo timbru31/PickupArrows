@@ -13,6 +13,7 @@ public class PickupArrows extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
 		config = getConfig();
 		// Add defaults and copy ;)
+		config.options().header("For help please either refer to the\nforum thread: http://bit.ly/pathread\nor the bukkit dev page: http://bit.ly/papagedev");
 		config.addDefault("skeletonsOnly", true);
 		config.addDefault("usePermissions", false);
 		config.addDefault("range", 10.0);

@@ -1,12 +1,11 @@
 name: PickupArrows
-main: me.exphc.PickupArrows.PickupArrows
-version: 1.2
+main: de.dustplanet.pickuparrows.PickupArrows
+version: 2.0
 permissions:
     pickuparrows.*:
         children:
             pickuparrows.allow: true
-        default: false
+        default: op
     pickuparrows.allow:
         description: Allows you to pickup arrows you normally would not be able to
-        default: false
-
+        default: op

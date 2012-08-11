@@ -26,7 +26,7 @@ public class PickupArrows extends JavaPlugin {
 
 	// Debug
 	public void log(String message) {
-		if (!config.getBoolean("debug")) {
+		if (config.getBoolean("debug")) {
 			log.info(message);
 		}
 	}

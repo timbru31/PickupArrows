@@ -39,6 +39,9 @@ public class PickupArrowsListener implements Listener {
             setAllowPickup(arrow);
             return;
         }
+        
+        // Check now for the shooter -> if null not able to get the entities around
+        if (shooter == null) return;
 
         // Otherwise, check if anyone nearby is allowed
         double r = plugin.config.getDouble("range");

@@ -3,3 +3,4 @@ me
 *.swp
 oldbuilds
 /ChangeLog
+.gitignore

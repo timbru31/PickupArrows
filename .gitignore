@@ -1,9 +1,0 @@
-*.jar
-me
-*.swp
-oldbuilds
-/ChangeLog
-.gitignore
-/PickupArrowsChangelog
-/PickupArrowsDevBukkitOrgPage
-/PickupArrowsThread

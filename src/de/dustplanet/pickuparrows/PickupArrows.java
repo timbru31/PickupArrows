@@ -1,25 +1,20 @@
 package de.dustplanet.pickuparrows;
 
-import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * PickupArrows for CraftBukkit/Bukkit
  * Handles general stuff!
- * Refer to the forum thread:
- * http://bit.ly/pathread
+ * Refer to the forum thread: http://bit.ly/pathread
  * Refer to the dev.bukkit.org page: http://bit.ly/papagedev
  * 
- * @author  xGhOsTkiLLeRx
- * @thanks  to mushroomhostage for the original PickupArrows plugin!
+ * @author xGhOsTkiLLeRx
+ * @thanks to mushroomhostage for the original PickupArrows plugin!
  */
 
 public class PickupArrows extends JavaPlugin {
-	private final Logger log = Logger.getLogger("Minecraft");
 	public FileConfiguration config;
-
-	public void onDisable() {}
 	
 	public void onEnable() {
 		// Event
@@ -38,7 +33,7 @@ public class PickupArrows extends JavaPlugin {
 	// Debug
 	public void log(String message) {
 		if (config.getBoolean("debug")) {
-			log.info(message);
+			getServer().getLogger().info(message);
 		}
 	}
 }

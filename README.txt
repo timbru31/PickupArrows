@@ -11,16 +11,31 @@ Standard config:
 # For help please either refer to the
 # forum thread: http://bit.ly/pathread
 # or the bukkit dev page: http://bit.ly/papagedev
-skeletonsOnly: true
 usePermissions: false
 range: 10.0
-debug: false
+pickupFrom:
+  skeleton: true
+  player: true
+  other: false
+  fire: false
 
-Permissions (if no permissions system is detected, only OPs are able to use the permissions!)
+Permissions (if no permissions system is detected, only OPs are able to pickup arrows!)
 Only bukkit's permissions system is supported!
 
 pickuparrows.*
-Description: Includes all permissions
+Description: Includes all sub permissions
 
-pickuparrows.allow
-Description: Includes all permissions for wheat
+pickuparrows.allow.*
+Description: Includes all permissions for collecting arrows
+
+pickuparrows.allow.fire
+Description: Allows you to pickup fire arrows
+
+pickuparrows.allow.skeleton
+Description: Allows you to pickup arrows from skeletons
+
+pickuparrows.allow.player
+Description: Allows you to pickup arrows from players
+
+pickuparrows.allow.other
+Description: Allows you to pickup arrows from other sources like a dispenser

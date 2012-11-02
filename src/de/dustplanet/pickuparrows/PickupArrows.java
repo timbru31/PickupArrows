@@ -20,20 +20,15 @@ public class PickupArrows extends JavaPlugin {
 		// Event
 		getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
 		config = getConfig();
-		// Add defaults and copy ;)
+		// Add defaults and copy them
 		config.options().header("For help please either refer to the\nforum thread: http://bit.ly/pathread\nor the bukkit dev page: http://bit.ly/papagedev");
-		config.addDefault("skeletonsOnly", true);
+		config.addDefault("pickupFrom.skeleton", true);
+		config.addDefault("pickupFrom.player", true);
+		config.addDefault("pickupFrom.other", false);
+		config.addDefault("pickupFrom.fire", false);
 		config.addDefault("usePermissions", false);
 		config.addDefault("range", 10.0);
-		config.addDefault("debug", false);
 		config.options().copyDefaults(true);
 		saveConfig();
-	}
-
-	// Debug
-	public void log(String message) {
-		if (config.getBoolean("debug")) {
-			getServer().getLogger().info(message);
-		}
 	}
 }

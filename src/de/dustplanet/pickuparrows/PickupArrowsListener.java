@@ -27,51 +27,65 @@ public class PickupArrowsListener implements Listener {
 		this.plugin = plugin;
 	}
 
-    @EventHandler
+	@EventHandler
 	public void onProjectileHitEvent(ProjectileHitEvent event) {
 		Projectile projectile = event.getEntity();
 		// Arrow?
 		if (projectile == null || !(projectile instanceof Arrow)) return;
+		// Get data
 		Arrow arrow = (Arrow) projectile;
 		Entity shooter = projectile.getShooter();
-		// If only skeletons is true, return if shooter isn't a skeleton
-		if (plugin.config.getBoolean("skeletonsOnly")) {
-            if (shooter == null || !(shooter instanceof Skeleton)) {
-            	plugin.log("Only skeltons arrows are allowed, this arrow is not from a skeleton");
-                return;
-            }
-        }
-
-        // Anyone can pickup
-        if (!plugin.config.getBoolean("usePermissions")) {
-            plugin.log("Allowed by configuration");
-            setAllowPickup(arrow);
-            return;
-        }
-        
-        // Check now for the shooter -> if null not able to get the entities around
-        if (shooter == null) return;
-
-        // Otherwise, check if anyone nearby is allowed
-        double r = plugin.config.getDouble("range");
-        List<Entity> nearbyEntities = shooter.getNearbyEntities(r, r, r);
-        for (Entity nearbyEntity: nearbyEntities) {
-            if (nearbyEntity instanceof Player) {
-            	// Player nearby?
-                Player player = (Player) nearbyEntity;
-                if (player.hasPermission("pickuparrows.allow")) {
-                	// Allow
-                    plugin.log(player.getName() + " has got the permission to pickup this arrow");
-                    setAllowPickup(arrow);
-                    return;
-                }
-                else plugin.log(player.getName() + " hasn't got the permission to pickup this arrow");
-            }
-        }
-        plugin.log("Nothing changed");
+		boolean onFire = arrow.getFireTicks() > 0 ? true : false;
+		// First deny it & then check if we can allow it again
+		setPickup(arrow, 0);
+		// If it's a fire arrow and they should be disabled, return here
+		if (onFire && !plugin.config.getBoolean("pickupFrom.fire")) return;
+		// If it's still on fire
+		else if (onFire) {
+			// If we have any player in the near range or we don't use permissions
+			if (plugin.config.getBoolean("usePermission") && !rangeCheck(arrow, "fire")) return;
+		}
+		// Shooter is a skeleton and they are enabled
+		if (shooter instanceof Skeleton && plugin.config.getBoolean("pickupFrom.skeleton")) {
+			// If we have any player in the near range or we don't use permissions
+			if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "skeleton")) setPickup(arrow, 1);
+		}
+		// Shooter is a player and they are enabled
+		else if (shooter instanceof Player && plugin.config.getBoolean("pickupFrom.player")) {
+			// If we have any player in the near range or we don't use permissions
+			if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "player")) setPickup(arrow, 1);
+		}
+		// Unknown shooter (like a dispenser) and they are enabled
+		else if (shooter == null && plugin.config.getBoolean("pickupFrom.other")) {
+			// If we have any player in the near range or we don't use permissions
+			if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "other")) setPickup(arrow, 1);
+		}
+	}
+	
+	/* Reflection call
+	 * 0 = disabled
+	 * 1 = enabled
+	 */
+	private void setPickup(Arrow arrow, int i) {
+		((CraftArrow)arrow).getHandle().fromPlayer = i;
 	}
 
-    private void setAllowPickup(Arrow arrow) {
-        ((CraftArrow)arrow).getHandle().fromPlayer = 1;
-    }
+	private boolean rangeCheck(Arrow arrow, String suffix) {
+		// Get the range
+		double r = plugin.config.getDouble("range");
+		// Check for near entities
+		List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
+		for (Entity nearbyEntity: nearbyEntities) {
+			// Player found
+			if (nearbyEntity instanceof Player) {
+				Player player = (Player) nearbyEntity;
+				// Check his permission
+				if (player.hasPermission("pickuparrows.allow." + suffix)) {
+					return true;
+				}
+				else return false;
+			}
+		}
+		return false;
+	}
 }

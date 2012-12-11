@@ -11,6 +11,7 @@
 		</repository>
 	</repositories>
 	<build>
+		<defaultGoal>build</defaultGoal>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>

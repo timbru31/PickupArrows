@@ -23,8 +23,9 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class PickupArrowsListener implements Listener {
 	private PickupArrows plugin;
-	public PickupArrowsListener(PickupArrows plugin) {
-		this.plugin = plugin;
+	
+	public PickupArrowsListener(PickupArrows instance) {
+		plugin = instance;
 	}
 
 	@EventHandler

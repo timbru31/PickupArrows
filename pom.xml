@@ -4,6 +4,9 @@
 	<groupId>de.dustplanet.pickuparrows</groupId>
 	<artifactId>PickupArrows</artifactId>
 	<version>2.1.1-SNAPSHOT</version>
+	<name>PickupArrows</name>
+	<url>http://dev.bukkit.org/server-mods/pickuparrows/</url>
+	<description>Allows players to pickup arrows from mobs</description>
 	<repositories>
 		<repository>
 			<id>bukkit-repo</id>
@@ -52,7 +55,14 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	<name>PickupArrows</name>
-	<url>http://dev.bukkit.org/server-mods/pickuparrows/</url>
-	<description>Allows players to pickup arrows from mobs</description>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://ci.dustplanet.de/job/PickupArrows</url>
+	</ciManagement>
+	<scm>
+		<tag>master</tag>
+		<url>https://github.com/xGhOsTkiLLeRx/PickupArrows</url>
+		<connection>scm:git:git://github.com/xGhOsTkiLLeRx/PickupArrows.git</connection>
+		<developerConnection>scm:git:git@github.com:xGhOsTkiLLeRx/PickupArrows.git</developerConnection>
+	</scm>
 </project>

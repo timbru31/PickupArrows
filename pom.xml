@@ -42,6 +42,7 @@
 	<build>
 		<!-- Compile for 1.6 and clean before -->
 		<defaultGoal>clean compile package</defaultGoal>
+		<finalName>PickupArrows</finalName>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -55,24 +56,6 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
-			</plugin>
-			<!-- Shade Plugin to set final name -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.0</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<!-- Set the final name -->
-							<finalName>PickupArrows</finalName>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 

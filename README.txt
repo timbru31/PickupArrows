@@ -18,6 +18,9 @@ pickupFrom:
   player: true
   other: false
   fire: false
+useWorldGuard: false
+useListAsBlacklist: false
+regions: []
 
 Permissions (if no permissions system is detected, only OPs are able to pickup arrows!)
 Only bukkit's permissions system is supported!

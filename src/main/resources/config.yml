@@ -8,3 +8,6 @@ pickupFrom:
   player: true
   other: false
   fire: false
+useWorldGuard: false
+useListAsBlacklist: false
+regions: []

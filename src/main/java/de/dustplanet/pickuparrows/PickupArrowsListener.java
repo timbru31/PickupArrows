@@ -1,7 +1,6 @@
 package de.dustplanet.pickuparrows;
 
 import java.util.List;
-
 import org.bukkit.craftbukkit.v1_5_R3.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -11,6 +10,9 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+// WorldGuard
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 /**
  * PickupArrows for CraftBukkit/Bukkit
@@ -43,6 +45,24 @@ public class PickupArrowsListener implements Listener {
 	Arrow arrow = (Arrow) projectile;
 	Entity shooter = projectile.getShooter();
 	boolean onFire = arrow.getFireTicks() > 0 ? true : false;
+	
+	// Make WorldGuard check
+	if (plugin.useWorldGuard && plugin.wg != null) {
+	    ApplicableRegionSet regionList = plugin.wg.getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
+	    // If we use a whitelist and no regions are here, cancel
+	    if (regionList.size() == 0 && !plugin.blacklist) {
+		return;
+	    }
+	    // Iterate through the regions
+	    for (ProtectedRegion region : regionList) {
+		String regionName = region.getId();
+		// Either it's on the blacklist or not on the whitelist --> cancel
+		if ((plugin.blacklist && plugin.regions.contains(regionName)) || !plugin.regions.contains(regionName)) {
+		    return;
+		}
+	    }
+	}
+	
 	// First deny it & then check if we can allow it again
 	setPickup(arrow, 0);
 	// If it's a fire arrow and they should be disabled, return here

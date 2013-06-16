@@ -71,7 +71,7 @@ public class PickupArrowsListener implements Listener {
 	}
 	// If it's still on fire
 	else if (onFire) {
-	    // If we have any player in the near range or we don't use permissions
+	    // If we have no player in the near range and we use permissions
 	    if (plugin.config.getBoolean("usePermission") && !rangeCheck(arrow, "fire")) {
 		return;
 	    }
@@ -120,8 +120,7 @@ public class PickupArrowsListener implements Listener {
 		// Check his permission
 		if (player.hasPermission("pickuparrows.allow." + suffix)) {
 		    return true;
-		}
-		else {
+		} else {
 		    return false;
 		}
 	    }

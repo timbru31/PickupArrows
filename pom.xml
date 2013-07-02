@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.sk89q</groupId>
 			<artifactId>worldguard</artifactId>
-			<version>5.7.4-SNAPSHOT</version>
+			<version>5.7.6-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 

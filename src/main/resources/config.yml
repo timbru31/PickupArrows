@@ -1,6 +1,5 @@
-# For help please either refer to the
-# forum thread: http://bit.ly/pathread
-# or the bukkit dev page: http://bit.ly/papagedev
+# For help please either refer to the bukkit dev page:
+# http://dev.bukkit.org/bukkit-plugins/pickuparrows/
 usePermissions: false
 range: 10.0
 pickupFrom:

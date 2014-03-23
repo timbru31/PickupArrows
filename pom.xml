@@ -79,6 +79,15 @@
 					<include>config.yml</include>
 				</includes>
 			</resource>
+			<resource>
+				<targetPath>.</targetPath>
+				<filtering>true</filtering>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>README.md</include>
+					<include>LICENSE.md</include>
+				</includes>
+			</resource>
 		</resources>
 	</build>
 

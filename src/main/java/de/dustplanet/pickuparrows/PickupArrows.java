@@ -12,10 +12,9 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 /**
  * PickupArrows for CraftBukkit/Bukkit
  * Handles general stuff!
- * Refer to the forum thread:
- * http://bit.ly/pathread
+ * 
  * Refer to the dev.bukkit.org page:
- * http://bit.ly/papagedev
+ * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
  * 
  * @author xGhOsTkiLLeRx
  * thanks to mushroomhostage for the original PickupArrows plugin!

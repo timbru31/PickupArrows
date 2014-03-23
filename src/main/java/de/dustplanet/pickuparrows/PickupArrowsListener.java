@@ -1,7 +1,8 @@
 package de.dustplanet.pickuparrows;
 
 import java.util.List;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftArrow;
+
+import org.bukkit.craftbukkit.v1_7_R2.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -10,6 +11,8 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.projectiles.ProjectileSource;
+
 // WorldGuard
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -17,11 +20,9 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 /**
  * PickupArrows for CraftBukkit/Bukkit
  * Handles activities (ProjectileHit)!
- * Refer to the forum thread:
- * http://bit.ly/pathread
  * 
  * Refer to the dev.bukkit.org page:
- * http://bit.ly/papagedev
+ * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
  * 
  * @author xGhOsTkiLLeRx
  * thanks to mushroomhostage for the original PickupArrows plugin!
@@ -43,7 +44,7 @@ public class PickupArrowsListener implements Listener {
 	}
 	// Get data
 	Arrow arrow = (Arrow) projectile;
-	Entity shooter = projectile.getShooter();
+	ProjectileSource shooter = projectile.getShooter();
 	boolean onFire = arrow.getFireTicks() > 0 ? true : false;
 	
 	// Make WorldGuard check

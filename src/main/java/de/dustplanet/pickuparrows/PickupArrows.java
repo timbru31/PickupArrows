@@ -38,13 +38,17 @@ public class PickupArrows extends JavaPlugin {
 	getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
 	config = getConfig();
 	// Add defaults and copy them
-	config.options().header("For help please either refer to the\nforum thread: http://bit.ly/pathread\nor the bukkit dev page: http://bit.ly/papagedev");
-	config.addDefault("pickupFrom.skeleton", true);
-	config.addDefault("pickupFrom.player", true);
-	config.addDefault("pickupFrom.other", false);
-	config.addDefault("pickupFrom.fire", false);
+	config.options().header("For help please either refer to the bukkit dev page:\nhttp://dev.bukkit.org/bukkit-plugins/pickuparrows/");
 	config.addDefault("usePermissions", false);
-	config.addDefault("range", 10.0);
+	String[] temp = {"skeleton", "player", "dispenser"};
+	for (String s : temp) {
+	    config.addDefault("pickupFrom." + s + "range", 10.0);
+	    config.addDefault("pickupFrom." + s + "fire", true);
+	    config.addDefault("pickupFrom." + s + "normal", true);
+	}
+	config.addDefault("pickupFrom.unknown.range", 5.0);
+	config.addDefault("pickupFrom.unknown.fire", false);
+	config.addDefault("pickupFrom.unknown.normal", false);
 	config.addDefault("useWorldGuard", false);
 	config.addDefault("useListAsBlacklist", false);
 	config.addDefault("regions", new ArrayList<String>());

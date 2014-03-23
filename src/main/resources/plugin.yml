@@ -4,30 +4,12 @@ description: Allows you to pickup arrows
 version: ${project.version}-b${BUILD_NUMBER}
 author: xGhOsTkiLLeRx
 authors: [mushroomhostage]
-website: http://bit.ly/papagedev
-website: http://bit.ly/pathread
+website: http://dev.bukkit.org/bukkit-plugins/pickuparrows/
 permissions:
     pickuparrows.*:
         children:
             pickuparrows.allow.*: true
         default: op
     pickuparrows.allow.*:
-        children:
-            pickuparrows.allow.fire: true
-            pickuparrows.allow.skeleton: true
-            pickuparrows.allow.player: true
-            pickuparrows.allow.other: true
-        default: op
-    pickuparrows.allow.fire:
-        description: Allows you to pickup fire arrows
-        default: op
-    pickuparrows.allow.skeleton:
-        description: Allows you to pickup arrows from skeletons
-        default: op
-    pickuparrows.allow.player:
-        description: Allows you to pickup arrows from players
-        default: op
-    pickuparrows.allow.other:
-        description: Allows you to pickup arrows from other sources like a dispenser
         default: op
 softdepend: [WorldGuard]

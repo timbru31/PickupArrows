@@ -1,12 +1,23 @@
 # For help please either refer to the bukkit dev page:
 # http://dev.bukkit.org/bukkit-plugins/pickuparrows/
 usePermissions: false
-range: 10.0
 pickupFrom:
-  skeleton: true
-  player: true
-  other: false
-  fire: false
+  skeleton:
+    range: 10.0
+    fire: true
+    normal: true
+  player:
+    range: 10.0
+    fire: true
+    normal: true
+  dispenser:
+    range: 10.0
+    fire: true
+    normal: true
+  unknown:
+    range: 5.0
+    fire: false
+    normal: false
 useWorldGuard: false
 useListAsBlacklist: false
 regions: []

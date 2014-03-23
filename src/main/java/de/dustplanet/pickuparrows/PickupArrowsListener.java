@@ -5,12 +5,13 @@ import java.util.List;
 import org.bukkit.craftbukkit.v1_7_R2.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Skeleton;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 
 // WorldGuard
@@ -35,6 +36,7 @@ public class PickupArrowsListener implements Listener {
 	plugin = instance;
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler
     public void onProjectileHitEvent(ProjectileHitEvent event) {
 	Projectile projectile = event.getEntity();
@@ -46,7 +48,15 @@ public class PickupArrowsListener implements Listener {
 	Arrow arrow = (Arrow) projectile;
 	ProjectileSource shooter = projectile.getShooter();
 	boolean onFire = arrow.getFireTicks() > 0 ? true : false;
-	
+	String shooterName = "unknown";
+	if (shooter instanceof Player) {
+	    shooterName = "player";
+	} else if (shooter instanceof BlockProjectileSource) {
+	    shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase();
+	} else if (shooter instanceof LivingEntity) {
+	    shooterName  = ((LivingEntity) shooter).getType().getName().toLowerCase();
+	}
+		
 	// Make WorldGuard check
 	if (plugin.useWorldGuard && plugin.wg != null) {
 	    ApplicableRegionSet regionList = plugin.wg.getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
@@ -66,35 +76,17 @@ public class PickupArrowsListener implements Listener {
 	
 	// First deny it & then check if we can allow it again
 	setPickup(arrow, 0);
-	// If it's a fire arrow and they should be disabled, return here
-	if (onFire && !plugin.config.getBoolean("pickupFrom.fire")) {
-	    return;
-	}
-	// If it's still on fire
-	else if (onFire) {
-	    // If we have no player in the near range and we use permissions
-	    if (plugin.config.getBoolean("usePermission") && !rangeCheck(arrow, "fire")) {
-		return;
-	    }
-	}
-	// Shooter is a skeleton and they are enabled
-	if (shooter instanceof Skeleton && plugin.config.getBoolean("pickupFrom.skeleton")) {
-	    // If we have any player in the near range or we don't use permissions
-	    if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "skeleton")) {
+	
+	// Check if shooterName is in config, otherwise fallback again
+	shooterName = plugin.config.contains("pickupFrom." + shooterName)? shooterName : "unkown";
+
+	// New check for flexible configuration
+	if (plugin.config.getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
+	    if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, (shooterName + ".fire"))) {
 		setPickup(arrow, 1);
 	    }
-	}
-	// Shooter is a player and they are enabled
-	else if (shooter instanceof Player && plugin.config.getBoolean("pickupFrom.player")) {
-	    // If we have any player in the near range or we don't use permissions
-	    if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "player")) {
-		setPickup(arrow, 1);
-	    }
-	}
-	// Unknown shooter (like a dispenser) and they are enabled
-	else if (shooter == null && plugin.config.getBoolean("pickupFrom.other")) {
-	    // If we have any player in the near range or we don't use permissions
-	    if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, "other"))  {
+	} else if (plugin.config.getBoolean("pickupFrom." + shooterName + ".normal") && !onFire) {
+	    if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, (shooterName + ".normal"))) {
 		setPickup(arrow, 1);
 	    }
 	}
@@ -109,9 +101,9 @@ public class PickupArrowsListener implements Listener {
 	((CraftArrow)arrow).getHandle().fromPlayer = i;
     }
 
-    private boolean rangeCheck(Arrow arrow, String suffix) {
+    private boolean rangeCheck(Arrow arrow, String rangeSuffix, String permSuffix) {
 	// Get the range
-	double r = plugin.config.getDouble("range");
+	double r = plugin.config.getDouble("range." + rangeSuffix , 10.0);
 	// Check for near entities
 	List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
 	for (Entity nearbyEntity: nearbyEntities) {
@@ -119,7 +111,7 @@ public class PickupArrowsListener implements Listener {
 	    if (nearbyEntity instanceof Player) {
 		Player player = (Player) nearbyEntity;
 		// Check his permission
-		if (player.hasPermission("pickuparrows.allow." + suffix)) {
+		if (player.hasPermission("pickuparrows.allow." + permSuffix) || player.hasPermission("pickuparrows.allow.*")) {
 		    return true;
 		} else {
 		    return false;

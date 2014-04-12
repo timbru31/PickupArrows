@@ -42,7 +42,7 @@ regions: []
 ````
 
 ## Permissions
-(Fallback to OPs, if no permisisons system is found)
+(Fallback to OPs, if no permissions system is found)
 
 ####General permissions (EXAMPLES)
 | Permission node | Description |

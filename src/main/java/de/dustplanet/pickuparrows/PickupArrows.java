@@ -21,12 +21,12 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
  */
 
 public class PickupArrows extends JavaPlugin {
-    public FileConfiguration config;
+    protected FileConfiguration config;
     // WordGuard stuff
-    public boolean useWorldGuard;
-    public boolean blacklist;
-    public List<String> regions = new ArrayList<String>();
-    public WorldGuardPlugin wg;
+    protected boolean useWorldGuard;
+    protected boolean blacklist;
+    protected List<String> regions = new ArrayList<String>();
+    protected WorldGuardPlugin wg;
 
     public void onDisable() {
 	// Make our list empty

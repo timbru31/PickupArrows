@@ -25,7 +25,7 @@ public class PickupArrows extends JavaPlugin {
     // WordGuard stuff
     protected boolean useWorldGuard;
     protected boolean blacklist;
-    protected List<String> regions = new ArrayList<String>();
+    protected List<String> regions = new ArrayList<>();
     protected WorldGuardPlugin wg;
 
     public void onDisable() {

@@ -1,105 +1,105 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.dustplanet</groupId>
-	<artifactId>PickupArrows</artifactId>
-	<version>3.0.2-SNAPSHOT</version>
-	<name>PickupArrows</name>
-	<url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
-	<description>Allows players to pickup arrows from mobs</description>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.dustplanet</groupId>
+  <artifactId>PickupArrows</artifactId>
+  <version>3.0.2-SNAPSHOT</version>
+  <name>PickupArrows</name>
+  <url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
+  <description>Allows players to pickup arrows from mobs</description>
 
-	<!-- Encode in UTF-8 -->
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+  <!-- Encode in UTF-8 -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
-	<!-- Repositories -->
-	<repositories>
-		<repository>
-			<id>bukkit-repo</id>
-			<url>http://repo.bukkit.org/content/repositories/snapshots</url>
-		</repository>
-		<repository>
-			<id>sk89q-repo</id>
-			<url>http://maven.sk89q.com/repo/</url>
-		</repository>
-	</repositories>
+  <!-- Repositories -->
+  <repositories>
+    <repository>
+      <id>bukkit-repo</id>
+      <url>http://repo.bukkit.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>sk89q-repo</id>
+      <url>http://maven.sk89q.com/repo/</url>
+    </repository>
+  </repositories>
 
-	<!-- Dependencies -->
-	<dependencies>
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.7.10-R0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>craftbukkit</artifactId>
-			<version>1.7.10-R0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sk89q</groupId>
-			<artifactId>worldguard</artifactId>
-			<version>5.9.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>bukkit</artifactId>
+      <version>1.7.10-R0.1-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bukkit</groupId>
+      <artifactId>craftbukkit</artifactId>
+      <version>1.7.10-R0.1-SNAPSHOT</version>
+      <type>jar</type>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.sk89q</groupId>
+      <artifactId>worldguard</artifactId>
+      <version>5.9.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 
-	<build>
-		<!-- Compile for 1.7 and clean before -->
-		<defaultGoal>clean compile package</defaultGoal>
-		<finalName>PickupArrows</finalName>
-		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<verbose>true</verbose>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
+  <build>
+    <!-- Compile for 1.7 and clean before -->
+    <defaultGoal>clean compile package</defaultGoal>
+    <finalName>PickupArrows</finalName>
+    <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <verbose>true</verbose>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
 
-		<!-- Include the .yml files -->
-		<resources>
-			<resource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>plugin.yml</include>
-					<include>config.yml</include>
-				</includes>
-			</resource>
-			<resource>
-				<targetPath>.</targetPath>
-				<filtering>true</filtering>
-				<directory>${basedir}</directory>
-				<includes>
-					<include>README.md</include>
-					<include>LICENSE.md</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
+    <!-- Include the .yml files -->
+    <resources>
+      <resource>
+        <targetPath>.</targetPath>
+        <filtering>true</filtering>
+        <directory>${basedir}/src/main/resources</directory>
+        <includes>
+          <include>plugin.yml</include>
+          <include>config.yml</include>
+        </includes>
+      </resource>
+      <resource>
+        <targetPath>.</targetPath>
+        <filtering>true</filtering>
+        <directory>${basedir}</directory>
+        <includes>
+          <include>README.md</include>
+          <include>LICENSE.md</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
 
-	<!-- GitHub information -->
-	<scm>
-		<tag>master</tag>
-		<url>https://github.com/xGhOsTkiLLeRx/PickupArrows</url>
-		<connection>scm:git:git://github.com/xGhOsTkiLLeRx/PickupArrows.git</connection>
-		<developerConnection>scm:git:git@github.com:xGhOsTkiLLeRx/PickupArrows.git</developerConnection>
-	</scm>
+  <!-- GitHub information -->
+  <scm>
+    <tag>master</tag>
+    <url>https://github.com/xGhOsTkiLLeRx/PickupArrows</url>
+    <connection>scm:git:git://github.com/xGhOsTkiLLeRx/PickupArrows.git</connection>
+    <developerConnection>scm:git:git@github.com:xGhOsTkiLLeRx/PickupArrows.git</developerConnection>
+  </scm>
 
-	<!-- Jenkins information -->
-	<ciManagement>
-		<system>jenkins</system>
-		<url>http://ci.dustplanet.de/job/PickupArrows</url>
-	</ciManagement>
+  <!-- Jenkins information -->
+  <ciManagement>
+    <system>jenkins</system>
+    <url>http://ci.dustplanet.de/job/PickupArrows</url>
+  </ciManagement>
 </project>

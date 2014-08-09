@@ -34,8 +34,6 @@ public class PickupArrows extends JavaPlugin {
     }
 
     public void onEnable() {
-        // Event
-        getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
         config = getConfig();
         // Add defaults and copy them
         config.options().header("For help please either refer to the bukkit dev page:\nhttp://dev.bukkit.org/bukkit-plugins/pickuparrows/");
@@ -65,5 +63,8 @@ public class PickupArrows extends JavaPlugin {
                 wg = (WorldGuardPlugin) worldGuard;
             }
         }
+
+        // Event
+        getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
     }
 }

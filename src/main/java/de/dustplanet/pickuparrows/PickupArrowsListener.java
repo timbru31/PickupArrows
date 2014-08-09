@@ -36,7 +36,6 @@ public class PickupArrowsListener implements Listener {
         plugin = instance;
     }
 
-    @SuppressWarnings("deprecation")
     @EventHandler
     public void onProjectileHitEvent(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
@@ -68,7 +67,7 @@ public class PickupArrowsListener implements Listener {
             for (ProtectedRegion region : regionList) {
                 String regionName = region.getId();
                 // Either it's on the blacklist or not on the whitelist --> cancel
-                if ((plugin.blacklist && plugin.regions.contains(regionName)) || !plugin.regions.contains(regionName)) {
+                if (plugin.blacklist && plugin.regions.contains(regionName) || !plugin.regions.contains(regionName)) {
                     return;
                 }
             }
@@ -82,11 +81,11 @@ public class PickupArrowsListener implements Listener {
 
         // New check for flexible configuration
         if (plugin.config.getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
-            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, (shooterName + ".fire"))) {
+            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, shooterName + ".fire")) {
                 setPickup(arrow, 1);
             }
         } else if (plugin.config.getBoolean("pickupFrom." + shooterName + ".normal") && !onFire) {
-            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, (shooterName + ".normal"))) {
+            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, shooterName + ".normal")) {
                 setPickup(arrow, 1);
             }
         }

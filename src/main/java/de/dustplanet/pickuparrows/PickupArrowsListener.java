@@ -19,7 +19,7 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 /**
- * PickupArrows for CraftBukkit/Bukkit
+ * PickupArrows for CraftBukkit/Bukkit.
  * Handles activities (ProjectileHit)!
  *
  * Refer to the dev.bukkit.org page:
@@ -31,12 +31,12 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class PickupArrowsListener implements Listener {
     /**
-     * PickupArrows instance
+     * PickupArrows instance.
      */
     private PickupArrows plugin;
 
     /**
-     * Creates a new PickupArrowsListener instance
+     * Creates a new PickupArrowsListener instance.
      * @param instance the PickupArrows instance
      */
     public PickupArrowsListener(PickupArrows instance) {
@@ -44,7 +44,7 @@ public class PickupArrowsListener implements Listener {
     }
 
     /**
-     * Event called when a projectile lands
+     * Event called when a projectile lands.
      * @param event a ProjectileHitEvent
      */
     @EventHandler
@@ -108,7 +108,7 @@ public class PickupArrowsListener implements Listener {
      * 1 = enabled
      */
     /**
-     * Sets whether the arrow is from a player or not
+     * Sets whether the arrow is from a player or not.
      * @param arrow to change
      * @param i to allow pickup (1) or disable pickup(2)
      */
@@ -117,7 +117,7 @@ public class PickupArrowsListener implements Listener {
     }
 
     /**
-     * A simple range by nearby entities check
+     * A simple range by nearby entities check.
      * @param arrow the shot arrow
      * @param shooterName the shooter name
      * @param permSuffix the shooter name with normal/fire suffix

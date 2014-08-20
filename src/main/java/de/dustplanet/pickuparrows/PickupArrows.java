@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 /**
- * PickupArrows for CraftBukkit/Bukkit
+ * PickupArrows for CraftBukkit/Bukkit.
  * Handles general stuff!
  *
  * Refer to the dev.bukkit.org page:
@@ -22,29 +22,29 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class PickupArrows extends JavaPlugin {
     /**
-     * FileConfiguration used for config values
+     * FileConfiguration used for config values.
      */
     private FileConfiguration config;
     // WordGuard stuff
     /**
-     * Boolean to determine if WorldGuard is used
+     * Boolean to determine if WorldGuard is used.
      */
     private boolean usingWorldGuard;
     /**
-     * Current status of the blacklist
+     * Current status of the blacklist.
      */
     private boolean blacklist;
     /**
-     * List of WorldGuard regions used for black/whitelist
+     * List of WorldGuard regions used for black/whitelist.
      */
     private List<String> regions = new ArrayList<>();
     /**
-     * WorldGuard instance
+     * WorldGuard instance.
      */
     private WorldGuardPlugin wg;
 
     /**
-     * Disables PickupArrows and clears region list
+     * Disables PickupArrows and clears region list.
      */
     @Override
     public void onDisable() {
@@ -53,7 +53,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Enables PickupArrows and loads config values
+     * Enables PickupArrows and loads config values.
      */
     @Override
     public void onEnable() {
@@ -92,7 +92,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Returns whether WorldGuard is used for regions hook
+     * Returns whether WorldGuard is used for regions hook.
      * @return true or false if whether WorldGuard is used
      */
     public boolean isUsingWorldGuard() {
@@ -100,7 +100,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Sets if WorldGuad integration should be used
+     * Sets if WorldGuad integration should be used.
      * @param useWorldGuard boolean to set if WorldGuard should be used
      */
     public void setUsingWorldGuard(boolean useWorldGuard) {
@@ -108,7 +108,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Returns the status of the blacklist
+     * Returns the status of the blacklist.
      * @return the current blacklist status
      */
     public boolean isBlacklist() {
@@ -116,7 +116,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Enabled or disables the blacklist
+     * Enabled or disables the blacklist.
      * @param blacklist boolean value
      */
     public void setBlacklist(boolean blacklist) {
@@ -124,7 +124,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Gets the WorldGuard regions
+     * Gets the WorldGuard regions.
      * @return the WorldGuard regions list
      */
     public List<String> getRegions() {
@@ -132,7 +132,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Sets for the WorldGuard regions
+     * Sets for the WorldGuard regions.
      * @param regions a list of WorldGuard regions
      */
     public void setRegions(List<String> regions) {
@@ -140,7 +140,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     * Gets the WorldGuard instance
+     * Gets the WorldGuard instance.
      * @return the WorldGuard instance or null
      */
     public WorldGuardPlugin getWorldGuard() {
@@ -148,7 +148,7 @@ public class PickupArrows extends JavaPlugin {
     }
 
     /**
-     *  Sets the WorldGuard instance
+     *  Sets the WorldGuard instance.
      * @param wg a WorldGuard instance
      */
     public void setWorldGuard(WorldGuardPlugin wg) {

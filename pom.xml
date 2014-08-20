@@ -11,6 +11,9 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <powermock.version>1.5.5</powermock.version>
+    <bukkit.version>1.7.10-R0.1-SNAPSHOT</bukkit.version>
+    <worldguard.version>5.9.1-SNAPSHOT</worldguard.version>
   </properties>
 
   <!-- Repositories -->
@@ -30,21 +33,39 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.7.10-R0.1-SNAPSHOT</version>
+      <version>${bukkit.version}</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
-      <version>1.7.10-R0.1-SNAPSHOT</version>
+      <version>${bukkit.version}</version>
       <type>jar</type>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>worldguard</artifactId>
-      <version>5.9.1-SNAPSHOT</version>
+      <version>${worldguard.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>${powermock.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

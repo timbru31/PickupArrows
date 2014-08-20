@@ -21,16 +21,16 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
  */
 
 public class PickupArrows extends JavaPlugin {
-    protected FileConfiguration config;
+    private FileConfiguration config;
     // WordGuard stuff
-    protected boolean useWorldGuard;
-    protected boolean blacklist;
-    protected List<String> regions = new ArrayList<>();
-    protected WorldGuardPlugin wg;
+    private boolean usingWorldGuard;
+    private boolean blacklist;
+    private List<String> regions = new ArrayList<>();
+    private WorldGuardPlugin wg;
 
     public void onDisable() {
         // Make our list empty
-        regions.clear();
+        getRegions().clear();
     }
 
     public void onEnable() {
@@ -53,18 +53,50 @@ public class PickupArrows extends JavaPlugin {
         config.options().copyDefaults(true);
         saveConfig();
         // WorldGuard regions
-        useWorldGuard = config.getBoolean("useWorldGuard");
-        if (useWorldGuard) {
-            blacklist = config.getBoolean("useListAsBlacklist");
-            regions = config.getStringList("regions");
+        setUsingWorldGuard(config.getBoolean("useWorldGuard"));
+        if (isUsingWorldGuard()) {
+            setBlacklist(config.getBoolean("useListAsBlacklist"));
+            setRegions(config.getStringList("regions"));
             // WorldGuard plugin
             Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
             if (worldGuard != null && worldGuard instanceof WorldGuardPlugin) {
-                wg = (WorldGuardPlugin) worldGuard;
+                setWorldGuard((WorldGuardPlugin) worldGuard);
             }
         }
 
         // Event
         getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
+    }
+
+    public boolean isUsingWorldGuard() {
+        return usingWorldGuard;
+    }
+
+    public void setUsingWorldGuard(boolean useWorldGuard) {
+        this.usingWorldGuard = useWorldGuard;
+    }
+
+    public boolean isBlacklist() {
+        return blacklist;
+    }
+
+    public void setBlacklist(boolean blacklist) {
+        this.blacklist = blacklist;
+    }
+
+    public List<String> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<String> regions) {
+        this.regions = regions;
+    }
+
+    public WorldGuardPlugin getWorldGuard() {
+        return wg;
+    }
+
+    public void setWorldGuard(WorldGuardPlugin wg) {
+        this.wg = wg;
     }
 }

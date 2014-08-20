@@ -21,10 +21,10 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 /**
  * PickupArrows for CraftBukkit/Bukkit
  * Handles activities (ProjectileHit)!
- * 
+ *
  * Refer to the dev.bukkit.org page:
  * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
- * 
+ *
  * @author xGhOsTkiLLeRx
  * thanks to mushroomhostage for the original PickupArrows plugin!
  */
@@ -57,17 +57,17 @@ public class PickupArrowsListener implements Listener {
         }
 
         // Make WorldGuard check
-        if (plugin.useWorldGuard && plugin.wg != null) {
-            ApplicableRegionSet regionList = plugin.wg.getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
+        if (plugin.isUsingWorldGuard() && plugin.getWorldGuard() != null) {
+            ApplicableRegionSet regionList = plugin.getWorldGuard().getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
             // If we use a whitelist and no regions are here, cancel
-            if (regionList.size() == 0 && !plugin.blacklist) {
+            if (regionList.size() == 0 && !plugin.isBlacklist()) {
                 return;
             }
             // Iterate through the regions
             for (ProtectedRegion region : regionList) {
                 String regionName = region.getId();
                 // Either it's on the blacklist or not on the whitelist --> cancel
-                if (plugin.blacklist && plugin.regions.contains(regionName) || !plugin.regions.contains(regionName)) {
+                if (plugin.isBlacklist() && plugin.getRegions().contains(regionName) || !plugin.getRegions().contains(regionName)) {
                     return;
                 }
             }
@@ -77,21 +77,21 @@ public class PickupArrowsListener implements Listener {
         setPickup(arrow, 0);
 
         // Check if shooterName is in config, otherwise fallback again
-        shooterName = plugin.config.contains("pickupFrom." + shooterName)? shooterName : "unkown";
+        shooterName = plugin.getConfig().contains("pickupFrom." + shooterName)? shooterName : "unkown";
 
         // New check for flexible configuration
-        if (plugin.config.getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
-            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, shooterName + ".fire")) {
+        if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
+            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".fire")) {
                 setPickup(arrow, 1);
             }
-        } else if (plugin.config.getBoolean("pickupFrom." + shooterName + ".normal") && !onFire) {
-            if (!plugin.config.getBoolean("usePermission") || rangeCheck(arrow, shooterName, shooterName + ".normal")) {
+        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire) {
+            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".normal")) {
                 setPickup(arrow, 1);
             }
         }
     }
 
-    /* 
+    /*
      * Reflection call
      * 0 = disabled
      * 1 = enabled
@@ -102,7 +102,7 @@ public class PickupArrowsListener implements Listener {
 
     private boolean rangeCheck(Arrow arrow, String rangeSuffix, String permSuffix) {
         // Get the range
-        double r = plugin.config.getDouble("range." + rangeSuffix , 10.0);
+        double r = plugin.getConfig().getDouble("range." + rangeSuffix , 10.0);
         // Check for near entities
         List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
         for (Entity nearbyEntity: nearbyEntities) {

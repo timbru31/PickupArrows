@@ -125,7 +125,7 @@ public class PickupArrowsListener implements Listener {
      */
     private boolean rangeCheck(Arrow arrow, String shooterName, String permSuffix) {
         // Get the range
-        double r = plugin.getConfig().getDouble("pickupFrom."+ shooterName + ".range" , 10.0);
+        double r = plugin.getConfig().getDouble("pickupFrom." + shooterName + ".range" , 10.0);
         // Check for near entities
         List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
         for (Entity nearbyEntity: nearbyEntities) {

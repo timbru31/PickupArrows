@@ -30,12 +30,23 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  */
 
 public class PickupArrowsListener implements Listener {
+    /**
+     * PickupArrows instance
+     */
     private PickupArrows plugin;
 
+    /**
+     * Creates a new PickupArrowsListener instance
+     * @param instance the PickupArrows instance
+     */
     public PickupArrowsListener(PickupArrows instance) {
         plugin = instance;
     }
 
+    /**
+     * Event called when a projectile lands
+     * @param event a ProjectileHitEvent
+     */
     @EventHandler
     public void onProjectileHitEvent(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
@@ -77,7 +88,7 @@ public class PickupArrowsListener implements Listener {
         setPickup(arrow, 0);
 
         // Check if shooterName is in config, otherwise fallback again
-        shooterName = plugin.getConfig().contains("pickupFrom." + shooterName)? shooterName : "unkown";
+        shooterName = plugin.getConfig().contains("pickupFrom." + shooterName) ? shooterName : "unkown";
 
         // New check for flexible configuration
         if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
@@ -96,13 +107,25 @@ public class PickupArrowsListener implements Listener {
      * 0 = disabled
      * 1 = enabled
      */
+    /**
+     * Sets whether the arrow is from a player or not
+     * @param arrow to change
+     * @param i to allow pickup (1) or disable pickup(2)
+     */
     private void setPickup(Arrow arrow, int i) {
-        ((CraftArrow)arrow).getHandle().fromPlayer = i;
+        ((CraftArrow) arrow).getHandle().fromPlayer = i;
     }
 
-    private boolean rangeCheck(Arrow arrow, String rangeSuffix, String permSuffix) {
+    /**
+     * A simple range by nearby entities check
+     * @param arrow the shot arrow
+     * @param shooterName the shooter name
+     * @param permSuffix the shooter name with normal/fire suffix
+     * @return if the pickup is allowed
+     */
+    private boolean rangeCheck(Arrow arrow, String shooterName, String permSuffix) {
         // Get the range
-        double r = plugin.getConfig().getDouble("range." + rangeSuffix , 10.0);
+        double r = plugin.getConfig().getDouble("pickupFrom."+ shooterName + ".range" , 10.0);
         // Check for near entities
         List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
         for (Entity nearbyEntity: nearbyEntities) {
@@ -110,11 +133,7 @@ public class PickupArrowsListener implements Listener {
             if (nearbyEntity instanceof Player) {
                 Player player = (Player) nearbyEntity;
                 // Check his permission
-                if (player.hasPermission("pickuparrows.allow." + permSuffix) || player.hasPermission("pickuparrows.allow.*")) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return player.hasPermission("pickuparrows.allow." + permSuffix) || player.hasPermission("pickuparrows.allow.*");
             }
         }
         return false;

@@ -16,8 +16,7 @@ Please see [LICENSE.md](LICENSE.md) for more information.
 ## Standard config
 To add new mobs/blocks just add the name in lowercase(!) like the scheme to the config.
 ````yaml
-# For help please either refer to the bukkit dev page:
-# http://dev.bukkit.org/bukkit-plugins/pickuparrows/
+# For help please refer to the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/pickuparrows/
 usePermissions: false
 pickupFrom:
   skeleton:

@@ -10,7 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fish;
+import org.bukkit.entity.FishHook;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -77,7 +77,7 @@ public class PickupArrowsListenerTest {
         listener.onProjectileHitEvent(mockEvent);
 
         // A Fish is a Projectile, too, but shouldn't pass the entity check
-        Projectile fish = mock(Fish.class);
+        Projectile fish = mock(FishHook.class);
         when(mockEvent.getEntity()).thenReturn(fish);
         listener.onProjectileHitEvent(mockEvent);
     }

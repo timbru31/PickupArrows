@@ -11,9 +11,9 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <powermock.version>1.5.5</powermock.version>
-    <bukkit.version>1.7.10-R0.1-SNAPSHOT</bukkit.version>
-    <worldguard.version>5.9.1-SNAPSHOT</worldguard.version>
+    <powermock.version>1.6.0</powermock.version>
+    <bukkit.version>1.8-R0.1-SNAPSHOT</bukkit.version>
+    <worldguard.version>6.0.0-SNAPSHOT</worldguard.version>
   </properties>
 
   <!-- Repositories -->
@@ -21,6 +21,10 @@
     <repository>
       <id>bukkit-repo</id>
       <url>http://repo.bukkit.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <id>dustplanet-repo</id>
+      <url>http://repo.dustplanet.de/artifactory/ext-snapshot-local</url>
     </repository>
     <repository>
       <id>sk89q-repo</id>

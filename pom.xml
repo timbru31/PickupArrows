@@ -47,6 +47,12 @@
       <version>${bukkit.version}</version>
       <type>jar</type>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.spigotmc</groupId>
+          <artifactId>minecraft-server</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.sk89q</groupId>

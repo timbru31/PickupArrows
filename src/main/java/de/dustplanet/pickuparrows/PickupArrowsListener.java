@@ -57,7 +57,10 @@ public class PickupArrowsListener implements Listener {
         // Get data
         Arrow arrow = (Arrow) projectile;
         ProjectileSource shooter = projectile.getShooter();
-        boolean onFire = arrow.getFireTicks() > 0 ? true : false;
+        boolean onFire = false;
+        if (arrow.getFireTicks() > 0) {
+            onFire = true;
+        }
         String shooterName = "unknown";
         if (shooter instanceof Player) {
             shooterName = "player";
@@ -88,7 +91,9 @@ public class PickupArrowsListener implements Listener {
         setPickup(arrow, 0);
 
         // Check if shooterName is in config, otherwise fallback again
-        shooterName = plugin.getConfig().contains("pickupFrom." + shooterName) ? shooterName : "unkown";
+        if (!plugin.getConfig().contains("pickupFrom." + shooterName)) {
+            shooterName = "unknown";
+        }
 
         // New check for flexible configuration
         if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {

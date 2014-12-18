@@ -60,6 +60,7 @@ public class PickupArrowsListenerTest {
         try {
             PowerMockito.doNothing().when(listener, "setPickup", arrow, 0);
             PowerMockito.doNothing().when(listener, "setPickup", arrow, 1);
+            PowerMockito.doReturn(1).when(listener, "getPickup", arrow);
         } catch (Exception e) {
             e.printStackTrace();
         }

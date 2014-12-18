@@ -70,6 +70,7 @@ public class PickupArrows extends JavaPlugin {
         config.addDefault("pickupFrom.unknown.range", 5.0);
         config.addDefault("pickupFrom.unknown.fire", false);
         config.addDefault("pickupFrom.unknown.normal", false);
+        config.addDefault("ignoreCreativeArrows", false);
         config.addDefault("useWorldGuard", false);
         config.addDefault("useListAsBlacklist", false);
         config.addDefault("regions", new ArrayList<String>());

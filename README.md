@@ -35,6 +35,7 @@ pickupFrom:
     range: 5.0
     fire: false
     normal: false
+ignoreCreativeArrows: false
 useWorldGuard: false
 useListAsBlacklist: false
 regions: []

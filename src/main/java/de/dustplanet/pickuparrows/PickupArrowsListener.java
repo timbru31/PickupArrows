@@ -70,6 +70,11 @@ public class PickupArrowsListener implements Listener {
             shooterName  = ((LivingEntity) shooter).getType().getName().toLowerCase();
         }
 
+        // Return if arrow is creative
+        if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == 2) {
+            return;
+        }
+
         // Make WorldGuard check
         if (plugin.isUsingWorldGuard() && plugin.getWorldGuard() != null) {
             ApplicableRegionSet regionList = plugin.getWorldGuard().getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
@@ -107,18 +112,22 @@ public class PickupArrowsListener implements Listener {
         }
     }
 
-    /*
-     * Reflection call
-     * 0 = disabled
-     * 1 = enabled
-     */
     /**
      * Sets whether the arrow is from a player or not.
      * @param arrow to change
-     * @param i to allow pickup (1) or disable pickup(2)
+     * @param i to allow pickup in creative (2), pickup for all (1) or disable pickup(0)
      */
     private void setPickup(Arrow arrow, int i) {
         ((CraftArrow) arrow).getHandle().fromPlayer = i;
+    }
+
+    /**
+     * Returns the current pickup state of an arrow
+     * @param arrow the arrow
+     * @return 0 (disabled), 1 (enabled for all) or 2 (enabled for creative), depending on the state
+     */
+    private int getPickup(Arrow arrow) {
+        return ((CraftArrow) arrow).getHandle().fromPlayer;
     }
 
     /**

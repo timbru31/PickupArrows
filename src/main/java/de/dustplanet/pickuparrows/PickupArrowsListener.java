@@ -2,7 +2,7 @@ package de.dustplanet.pickuparrows;
 
 import java.util.List;
 
-import org.bukkit.craftbukkit.v1_8_R1.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_8_R2.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

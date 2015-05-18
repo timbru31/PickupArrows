@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dustplanet</groupId>
   <artifactId>PickupArrows</artifactId>
-  <version>3.0.5-SNAPSHOT</version>
+  <version>3.0.6-SNAPSHOT</version>
   <name>PickupArrows</name>
   <url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
   <description>Allows players to pickup arrows from mobs</description>
@@ -11,9 +11,10 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <powermock.version>1.6.0</powermock.version>
-    <bukkit.version>1.8.3-R0.1-SNAPSHOT</bukkit.version>
+    <powermock.version>1.6.2</powermock.version>
+    <bukkit.version>1.8.4-R0.1-SNAPSHOT</bukkit.version>
     <worldguard.version>6.0.0-SNAPSHOT</worldguard.version>
+    <junit.version>4.12</junit.version>
   </properties>
 
   <!-- Repositories -->
@@ -62,7 +63,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

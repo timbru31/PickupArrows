@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dustplanet</groupId>
   <artifactId>PickupArrows</artifactId>
-  <version>3.0.6-SNAPSHOT</version>
+  <version>3.0.7-SNAPSHOT</version>
   <name>PickupArrows</name>
   <url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
   <description>Allows players to pickup arrows from mobs</description>
@@ -12,17 +12,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <powermock.version>1.6.2</powermock.version>
-    <bukkit.version>1.8.4-R0.1-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.8.5-R0.1-SNAPSHOT</bukkit.version>
     <worldguard.version>6.0.0-SNAPSHOT</worldguard.version>
     <junit.version>4.12</junit.version>
   </properties>
 
   <!-- Repositories -->
   <repositories>
-    <repository>
-      <id>bukkit-repo</id>
-      <url>http://repo.bukkit.org/content/repositories/snapshots</url>
-    </repository>
     <repository>
       <id>dustplanet-repo</id>
       <url>http://repo.dustplanet.de/artifactory/ext-snapshot-local</url>

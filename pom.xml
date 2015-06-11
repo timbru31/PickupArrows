@@ -12,8 +12,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <powermock.version>1.6.2</powermock.version>
-    <bukkit.version>1.8.6-R0.1-SNAPSHOT</bukkit.version>
-    <worldguard.version>6.0.0-SNAPSHOT</worldguard.version>
+    <bukkit.version>1.8.7-R0.1-SNAPSHOT</bukkit.version>
+    <worldguard.version>6.1.1-SNAPSHOT</worldguard.version>
     <junit.version>4.12</junit.version>
   </properties>
 
@@ -85,7 +85,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+        <version>3.3</version>
         <configuration>
           <verbose>true</verbose>
           <source>1.7</source>
@@ -128,6 +128,6 @@
   <!-- Jenkins information -->
   <ciManagement>
     <system>jenkins</system>
-    <url>http://ci.dustplanet.de/job/PickupArrows</url>
+    <url>https://ci.dustplanet.de/job/PickupArrows</url>
   </ciManagement>
 </project>

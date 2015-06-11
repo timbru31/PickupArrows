@@ -122,7 +122,7 @@ public class PickupArrowsListener implements Listener {
     }
 
     /**
-     * Returns the current pickup state of an arrow
+     * Returns the current pickup state of an arrow.
      * @param arrow the arrow
      * @return 0 (disabled), 1 (enabled for all) or 2 (enabled for creative), depending on the state
      */

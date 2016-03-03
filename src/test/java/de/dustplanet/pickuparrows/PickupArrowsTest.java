@@ -15,7 +15,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * PickupArrows for CraftBukkit/Bukkit
+ * PickupArrows for CraftBukkit/Spigot
  * Handles the test cases
  *
  * Refer to the dev.bukkit.org page:

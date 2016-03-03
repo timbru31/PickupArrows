@@ -1,5 +1,6 @@
 package de.dustplanet.pickuparrows;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
 import static org.mockito.Mockito.times;
@@ -25,8 +26,10 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import net.minecraft.server.v1_9_R1.EntityArrow.PickupStatus;
+
 /**
- * PickupArrows for CraftBukkit/Bukkit
+ * PickupArrows for CraftBukkit/Spigot
  * Handles the test cases
  *
  * Refer to the dev.bukkit.org page:
@@ -58,9 +61,9 @@ public class PickupArrowsListenerTest {
 
         // Always ignore setPickup private method
         try {
-            PowerMockito.doNothing().when(listener, "setPickup", arrow, 0);
-            PowerMockito.doNothing().when(listener, "setPickup", arrow, 1);
-            PowerMockito.doReturn(1).when(listener, "getPickup", arrow);
+            PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.ALLOWED);
+            PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.DISALLOWED);
+            PowerMockito.doReturn(PickupStatus.DISALLOWED).when(listener, "getPickup", arrow);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,10 +152,11 @@ public class PickupArrowsListenerTest {
 
         // we need to verify private invocations after the for loop because it's not reset
         try {
-            PowerMockito.verifyPrivate(listener, times(64)).invoke("setPickup", arrow, 0);
-            PowerMockito.verifyPrivate(listener, times(16)).invoke("setPickup", arrow, 1);
+            PowerMockito.verifyPrivate(listener, times(64)).invoke("setPickup", arrow, PickupStatus.DISALLOWED);
+            PowerMockito.verifyPrivate(listener, times(16)).invoke("setPickup", arrow, PickupStatus.ALLOWED);
         } catch (Exception e) {
             e.printStackTrace();
+            fail();
         }
     }
 

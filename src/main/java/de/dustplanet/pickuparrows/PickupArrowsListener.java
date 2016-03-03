@@ -2,12 +2,14 @@ package de.dustplanet.pickuparrows;
 
 import java.util.List;
 
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_9_R1.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.SpectralArrow;
+import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
@@ -18,8 +20,10 @@ import org.bukkit.projectiles.ProjectileSource;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import net.minecraft.server.v1_9_R1.EntityArrow.PickupStatus;
+
 /**
- * PickupArrows for CraftBukkit/Bukkit.
+ * PickupArrows for CraftBukkit/Spigot.
  * Handles activities (ProjectileHit)!
  *
  * Refer to the dev.bukkit.org page:
@@ -61,17 +65,20 @@ public class PickupArrowsListener implements Listener {
         if (arrow.getFireTicks() > 0) {
             onFire = true;
         }
+        boolean isSpectral = projectile instanceof SpectralArrow;
+        boolean isTipped = projectile instanceof TippedArrow;
+
         String shooterName = "unknown";
         if (shooter instanceof Player) {
             shooterName = "player";
         } else if (shooter instanceof BlockProjectileSource) {
             shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase();
         } else if (shooter instanceof LivingEntity) {
-            shooterName  = ((LivingEntity) shooter).getType().getName().toLowerCase();
+            shooterName  = ((LivingEntity) shooter).getType().toString().toLowerCase();
         }
 
         // Return if arrow is creative
-        if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == 2) {
+        if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == PickupStatus.CREATIVE_ONLY) {
             return;
         }
 
@@ -93,21 +100,30 @@ public class PickupArrowsListener implements Listener {
         }
 
         // First deny it & then check if we can allow it again
-        setPickup(arrow, 0);
+        setPickup(arrow, PickupStatus.DISALLOWED);
 
         // Check if shooterName is in config, otherwise fallback again
         if (!plugin.getConfig().contains("pickupFrom." + shooterName)) {
             shooterName = "unknown";
         }
-
+        System.out.println("spectral " + isSpectral);
+        System.out.println("tipped " + isTipped);
         // New check for flexible configuration
         if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
             if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".fire")) {
-                setPickup(arrow, 1);
+                setPickup(arrow, PickupStatus.ALLOWED);
             }
-        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire) {
+        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire && !isSpectral && !isTipped) {
             if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".normal")) {
-                setPickup(arrow, 1);
+                setPickup(arrow, PickupStatus.ALLOWED);
+            }
+        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral") && isSpectral && !isTipped) {
+            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".spectral")) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            }
+        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
+            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".tipped")) {
+                setPickup(arrow, PickupStatus.ALLOWED);
             }
         }
     }
@@ -115,18 +131,18 @@ public class PickupArrowsListener implements Listener {
     /**
      * Sets whether the arrow is from a player or not.
      * @param arrow to change
-     * @param i to allow pickup in creative (2), pickup for all (1) or disable pickup(0)
+     * @param status PickupStatus (allowed, disallowed, creative only)
      */
-    private void setPickup(Arrow arrow, int i) {
-        ((CraftArrow) arrow).getHandle().fromPlayer = i;
+    private void setPickup(Arrow arrow, PickupStatus status) {
+        ((CraftArrow) arrow).getHandle().fromPlayer = status;
     }
 
     /**
      * Returns the current pickup state of an arrow.
      * @param arrow the arrow
-     * @return 0 (disabled), 1 (enabled for all) or 2 (enabled for creative), depending on the state
+     * @return PickupStatus (allowed, disallowed, creative only)
      */
-    private int getPickup(Arrow arrow) {
+    private PickupStatus getPickup(Arrow arrow) {
         return ((CraftArrow) arrow).getHandle().fromPlayer;
     }
 

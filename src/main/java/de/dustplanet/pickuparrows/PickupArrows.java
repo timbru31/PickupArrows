@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 /**
- * PickupArrows for CraftBukkit/Bukkit.
+ * PickupArrows for CraftBukkit/Spigot.
  * Handles general stuff!
  *
  * Refer to the dev.bukkit.org page:
@@ -66,10 +66,14 @@ public class PickupArrows extends JavaPlugin {
             config.addDefault("pickupFrom." + s + ".range", 10.0);
             config.addDefault("pickupFrom." + s + ".fire", true);
             config.addDefault("pickupFrom." + s + ".normal", true);
+            config.addDefault("pickupFrom." + s + ".spectral", true);
+            config.addDefault("pickupFrom." + s + ".tipped", true);
         }
         config.addDefault("pickupFrom.unknown.range", 5.0);
         config.addDefault("pickupFrom.unknown.fire", false);
         config.addDefault("pickupFrom.unknown.normal", false);
+        config.addDefault("pickupFrom.unknown.spectral", false);
+        config.addDefault("pickupFrom.unknown.tipped", false);
         config.addDefault("ignoreCreativeArrows", false);
         config.addDefault("useWorldGuard", false);
         config.addDefault("useListAsBlacklist", false);

@@ -1,7 +1,11 @@
-# PickupArrows [![Build Status](http://ci.dustplanet.de/job/PickupArrows/badge/icon)](http://ci.dustplanet.de/job/PickupArrows/)
+# PickupArrows
+[![Build Status](https://ci.dustplanet.de/job/PickupArrows/badge/icon)](https://ci.dustplanet.de/job/PickupArrows/)
+[![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
+[![Circle CI](https://img.shields.io/circleci/project/timbru31/PickupArrows.svg)](https://circleci.com/gh/timbru31/PickupArrows)
+[![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
 
 ## Info
-This CraftBukkit plugin aims to offer the ability to pickup arrows from various source up again.
+This CraftBukkit/Spigot plugin aims to offer the ability to pickup arrows from various source up again.
 You can define any shooter source and configure burning and normal arrows.
 Special features are
 * Flexible configuration support, add or remove own mobs/sources of shooters

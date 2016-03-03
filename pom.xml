@@ -11,14 +11,18 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <powermock.version>1.6.2</powermock.version>
-    <bukkit.version>1.8.7-R0.1-SNAPSHOT</bukkit.version>
+    <powermock.version>1.6.4</powermock.version>
+    <bukkit.version>1.9-R0.1-SNAPSHOT</bukkit.version>
     <worldguard.version>6.1.1-SNAPSHOT</worldguard.version>
     <junit.version>4.12</junit.version>
   </properties>
 
   <!-- Repositories -->
   <repositories>
+    <repository>
+      <id>spigotmc-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+    </repository>
     <repository>
       <id>dustplanet-repo</id>
       <url>http://repo.dustplanet.de/artifactory/ext-snapshot-local</url>
@@ -85,7 +89,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <version>3.5.1</version>
         <configuration>
           <verbose>true</verbose>
           <source>1.7</source>
@@ -120,9 +124,9 @@
   <!-- GitHub information -->
   <scm>
     <tag>master</tag>
-    <url>https://github.com/xGhOsTkiLLeRx/PickupArrows</url>
-    <connection>scm:git:git://github.com/xGhOsTkiLLeRx/PickupArrows.git</connection>
-    <developerConnection>scm:git:git@github.com:xGhOsTkiLLeRx/PickupArrows.git</developerConnection>
+    <url>https://github.com/timbru31/PickupArrows</url>
+    <connection>scm:git:git://github.com/timbru31/PickupArrows.git</connection>
+    <developerConnection>scm:git:git@github.com:timbru31/PickupArrows.git</developerConnection>
   </scm>
 
   <!-- Jenkins information -->

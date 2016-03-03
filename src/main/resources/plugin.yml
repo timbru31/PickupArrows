@@ -6,10 +6,10 @@ author: xGhOsTkiLLeRx
 authors: [mushroomhostage]
 website: http://dev.bukkit.org/bukkit-plugins/pickuparrows/
 permissions:
-    pickuparrows.*:
-        children:
-            pickuparrows.allow.*: true
-        default: op
-    pickuparrows.allow.*:
-        default: op
+  pickuparrows.*:
+    children:
+      pickuparrows.allow.*: true
+    default: op
+  pickuparrows.allow.*:
+    default: op
 softdepend: [WorldGuard]

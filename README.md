@@ -9,7 +9,7 @@ This CraftBukkit/Spigot plugin aims to offer the ability to pickup arrows from v
 You can define any shooter source and configure burning, normal, spectral and tipped arrows.
 Special features are
 * Flexible configuration support, add or remove own mobs/sources of shooters
-* Basic permission support on a range check
+* Permission to control the pickup
 * WorldGuard support. Black or whitelist regions, where the plugin should be active!
 * Support for normal, fire, spectral or tipped arrows
 
@@ -25,25 +25,21 @@ To add new mobs/blocks just add the name in lowercase(!) like the scheme to the 
 usePermissions: false
 pickupFrom:
   skeleton:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   player:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   dispenser:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   unknown:
-    range: 5.0
     fire: false
     normal: false
     spectral: false
@@ -57,20 +53,17 @@ regions: []
 ## Permissions
 (Fallback to OPs, if no permissions system is found)
 
-####General permissions (EXAMPLES)
+#### General permissions
 | Permission node | Description |
 |:----------:|:----------:|
-| pickuparrows.allow.skeleton.normal | Ability to pickup arrows (non burning) from a skeleton |
-| picluparrpws.allow.skeleton.fire | Ability to pickup arrows (burning) from a skeleton |
-| picluparrpws.allow.skeleton.spectral | Ability to pickup arrows (spectral) from a skeleton |
-| picluparrpws.allow.skeleton.tipped | Ability to pickup arrows (tipped) from a skeleton |
-| pickuparrows.allow.dispenser.normal | Ability to pickup arrows (non burning) from a dispenser |
-| picluparrpws.allow.dispenser.fire | Ability to pickup arrows (burning) from a dispenser |
-| picluparrpws.allow.dispenser.spectral | Ability to pickup arrows (spectral) from a dispenser |
-| picluparrpws.allow.dispenser.tipped | Ability to pickup arrows (tipped) from a dispenser |
+| pickuparrows.allow.normal | Ability to pickup normal arrows (non burning) |
+| picluparrpws.allow.fire | Ability to pickup fire arrows (burning) |
+| picluparrpws.allow.spectral | Ability to pickup spectral arrows |
+| picluparrpws.allow.tipped | Ability to pickup tipped arrows |
 
 
-####Special permissions
+
+#### Special permissions
 * pickuparrows.* - Grants access to ALL other permissions (better use the allow permission instead!)
 * pickuparrows.allow.* - Grants access to ALL permissions for pickup
 

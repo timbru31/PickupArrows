@@ -2,25 +2,21 @@
 usePermissions: false
 pickupFrom:
   skeleton:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   player:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   dispenser:
-    range: 10.0
     fire: true
     normal: true
     spectral: true
     tipped: true
   unknown:
-    range: 5.0
     fire: false
     normal: false
     spectral: false

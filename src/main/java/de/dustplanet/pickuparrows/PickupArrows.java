@@ -63,13 +63,11 @@ public class PickupArrows extends JavaPlugin {
         config.addDefault("usePermissions", false);
         String[] temp = {"skeleton", "player", "dispenser"};
         for (String s : temp) {
-            config.addDefault("pickupFrom." + s + ".range", 10.0);
             config.addDefault("pickupFrom." + s + ".fire", true);
             config.addDefault("pickupFrom." + s + ".normal", true);
             config.addDefault("pickupFrom." + s + ".spectral", true);
             config.addDefault("pickupFrom." + s + ".tipped", true);
         }
-        config.addDefault("pickupFrom.unknown.range", 5.0);
         config.addDefault("pickupFrom.unknown.fire", false);
         config.addDefault("pickupFrom.unknown.normal", false);
         config.addDefault("pickupFrom.unknown.spectral", false);

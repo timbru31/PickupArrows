@@ -11,5 +11,18 @@ permissions:
       pickuparrows.allow.*: true
     default: op
   pickuparrows.allow.*:
+    children:
+        pickuparrows.allow.fire: true
+        pickuparrows.allow.normal: true
+        pickuparrows.allow.spectral: true
+        pickuparrows.allow.tipped: true
+    default: op
+  pickuparrows.allow.fire:
+    default: op
+  pickuparrows.allow.normal:
+    default: op
+  pickuparrows.allow.spectral:
+    default: op
+  pickuparrows.allow.tipped:
     default: op
 softdepend: [WorldGuard]

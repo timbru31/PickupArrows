@@ -1,10 +1,7 @@
 package de.dustplanet.pickuparrows;
 
-import java.util.List;
-
 import org.bukkit.craftbukkit.v1_9_R1.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -13,6 +10,7 @@ import org.bukkit.entity.TippedArrow;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -61,12 +59,10 @@ public class PickupArrowsListener implements Listener {
         // Get data
         Arrow arrow = (Arrow) projectile;
         ProjectileSource shooter = projectile.getShooter();
-        boolean onFire = false;
-        if (arrow.getFireTicks() > 0) {
-            onFire = true;
-        }
-        boolean isSpectral = projectile instanceof SpectralArrow;
-        boolean isTipped = projectile instanceof TippedArrow;
+
+        boolean onFire = onFire(arrow);
+        boolean isSpectral = isSpectral(arrow);
+        boolean isTipped = isTipped(arrow);
 
         String shooterName = "unknown";
         if (shooter instanceof Player) {
@@ -106,25 +102,15 @@ public class PickupArrowsListener implements Listener {
         if (!plugin.getConfig().contains("pickupFrom." + shooterName)) {
             shooterName = "unknown";
         }
-        System.out.println("spectral " + isSpectral);
-        System.out.println("tipped " + isTipped);
         // New check for flexible configuration
         if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
-            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".fire")) {
-                setPickup(arrow, PickupStatus.ALLOWED);
-            }
+            setPickup(arrow, PickupStatus.ALLOWED);
         } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire && !isSpectral && !isTipped) {
-            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".normal")) {
-                setPickup(arrow, PickupStatus.ALLOWED);
-            }
+            setPickup(arrow, PickupStatus.ALLOWED);
         } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral") && isSpectral && !isTipped) {
-            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".spectral")) {
-                setPickup(arrow, PickupStatus.ALLOWED);
-            }
+            setPickup(arrow, PickupStatus.ALLOWED);
         } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
-            if (!plugin.getConfig().getBoolean("usePermissions") || rangeCheck(arrow, shooterName, shooterName + ".tipped")) {
-                setPickup(arrow, PickupStatus.ALLOWED);
-            }
+            setPickup(arrow, PickupStatus.ALLOWED);
         }
     }
 
@@ -146,26 +132,43 @@ public class PickupArrowsListener implements Listener {
         return ((CraftArrow) arrow).getHandle().fromPlayer;
     }
 
-    /**
-     * A simple range by nearby entities check.
-     * @param arrow the shot arrow
-     * @param shooterName the shooter name
-     * @param permSuffix the shooter name with normal/fire suffix
-     * @return if the pickup is allowed
-     */
-    private boolean rangeCheck(Arrow arrow, String shooterName, String permSuffix) {
-        // Get the range
-        double r = plugin.getConfig().getDouble("pickupFrom." + shooterName + ".range" , 10.0);
-        // Check for near entities
-        List<Entity> nearbyEntities = arrow.getNearbyEntities(r, r, r);
-        for (Entity nearbyEntity: nearbyEntities) {
-            // Player found
-            if (nearbyEntity instanceof Player) {
-                Player player = (Player) nearbyEntity;
-                // Check his permission
-                return player.hasPermission("pickuparrows.allow." + permSuffix) || player.hasPermission("pickuparrows.allow.*");
-            }
+    private boolean onFire(Arrow arrow) {
+        boolean onFire = false;
+        if (arrow.getFireTicks() > 0) {
+            onFire = true;
         }
-        return false;
+        return onFire;
+    }
+
+    private boolean isTipped(Arrow arrow) {
+        return arrow instanceof TippedArrow;
+
+    }
+
+    private boolean isSpectral(Arrow arrow) {
+        return arrow instanceof SpectralArrow;
+    }
+
+    @EventHandler
+    public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
+        if (!plugin.getConfig().getBoolean("usePermissions", false)) {
+            return;
+        }
+        Arrow arrow = event.getArrow();
+        boolean onFire = onFire(arrow);
+        boolean isSpectral = isSpectral(arrow);
+        boolean isTipped = isTipped(arrow);
+
+        Player player = event.getPlayer();
+
+        if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
+            event.setCancelled(true);
+        } else if (!onFire && !isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.normal")) {
+            event.setCancelled(true);
+        } else if (isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.spectral")) {
+            event.setCancelled(true);
+        } else if (!isSpectral && isTipped && !player.hasPermission("pickuparrows.allow.tipped")) {
+            event.setCancelled(true);
+        }
     }
 }

@@ -110,49 +110,41 @@ public class PickupArrowsListenerTest {
             boolean v[] = {false, true};
             for (boolean value: v) {
                 usePermissions(value);
-                for(boolean valuee : v) {
-                    try {
-                        PowerMockito.doReturn(valuee).when(listener, "rangeCheck", arrow, "", "");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                // Defaults
+                when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(true);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(true);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(true);
 
-                    // Defaults
-                    when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(true);
-                    when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(true);
-                    when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(true);
+                /*
+                 * Case 1 is no fire and allowed
+                 */
+                onFire(0);
+                listener.onProjectileHitEvent(mockEvent);
 
-                    /*
-                     * Case 1 is no fire and allowed
-                     */
-                    onFire(0);
-                    listener.onProjectileHitEvent(mockEvent);
+                /*
+                 * Case 2 is fire and allowed
+                 */
+                onFire(1);
+                listener.onProjectileHitEvent(mockEvent);
 
-                    /*
-                     * Case 2 is fire and allowed
-                     */
-                    onFire(1);
-                    listener.onProjectileHitEvent(mockEvent);
+                /*
+                 * Case 3 is fire and disallowed
+                 */
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(false);
+                listener.onProjectileHitEvent(mockEvent);
 
-                    /*
-                     * Case 3 is fire and disallowed
-                     */
-                    when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(false);
-                    listener.onProjectileHitEvent(mockEvent);
-
-                    /*
-                     * Case 4 is no fire and disallowed
-                     */
-                    onFire(0);
-                    when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(false);
-                    listener.onProjectileHitEvent(mockEvent);
-                }
+                /*
+                 * Case 4 is no fire and disallowed
+                 */
+                onFire(0);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(false);
+                listener.onProjectileHitEvent(mockEvent);
             }
         }
 
         // we need to verify private invocations after the for loop because it's not reset
         try {
-            PowerMockito.verifyPrivate(listener, times(64)).invoke("setPickup", arrow, PickupStatus.DISALLOWED);
+            PowerMockito.verifyPrivate(listener, times(32)).invoke("setPickup", arrow, PickupStatus.DISALLOWED);
             PowerMockito.verifyPrivate(listener, times(16)).invoke("setPickup", arrow, PickupStatus.ALLOWED);
         } catch (Exception e) {
             e.printStackTrace();

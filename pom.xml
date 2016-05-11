@@ -10,9 +10,9 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <build.number>-b${BUILD_NUMBER}</build.number>
-    <bukkit.version>1.9-R0.1-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.9.4-R0.1-SNAPSHOT</bukkit.version>
     <junit.version>4.12</junit.version>
-    <powermock.version>1.6.4</powermock.version>
+    <powermock.version>1.6.5</powermock.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <worldguard.version>6.1.1-SNAPSHOT</worldguard.version>
   </properties>
@@ -24,8 +24,8 @@
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
     </repository>
     <repository>
-      <id>dustplanet-repo</id>
-      <url>http://repo.dustplanet.de/artifactory/ext-snapshot-local</url>
+      <id>dustplanet</id>
+      <url>http://repo.dustplanet.de/artifactory/craftbukkit</url>
     </repository>
     <repository>
       <id>sk89q-repo</id>

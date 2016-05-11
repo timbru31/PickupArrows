@@ -26,7 +26,7 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import net.minecraft.server.v1_9_R1.EntityArrow.PickupStatus;
+import net.minecraft.server.v1_9_R2.EntityArrow.PickupStatus;
 
 /**
  * PickupArrows for CraftBukkit/Spigot

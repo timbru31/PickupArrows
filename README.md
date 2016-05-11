@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
 [![Circle CI](https://img.shields.io/circleci/project/timbru31/PickupArrows.svg)](https://circleci.com/gh/timbru31/PickupArrows)
 [![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v3.0.8-orange.svg)](http://dev.bukkit.org/bukkit-plugins/pickuparrows/)
+[![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](LICENSE.md)
 
 ## Info
 This CraftBukkit/Spigot plugin aims to offer the ability to pickup arrows from various source up again.

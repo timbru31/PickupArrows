@@ -25,7 +25,7 @@
     </repository>
     <repository>
       <id>dustplanet</id>
-      <url>http://repo.dustplanet.de/artifactory/craftbukkit</url>
+      <url>http://repo.dustplanet.de/artifactory/craftbukkit/</url>
     </repository>
     <repository>
       <id>sk89q-repo</id>
@@ -39,15 +39,11 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <version>${bukkit.version}</version>
-      <type>jar</type>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>craftbukkit</artifactId>
       <version>${bukkit.version}</version>
-      <type>jar</type>
-      <scope>compile</scope>
       <exclusions>
         <exclusion>
           <groupId>org.spigotmc</groupId>
@@ -59,6 +55,12 @@
       <groupId>com.sk89q</groupId>
       <artifactId>worldguard</artifactId>
       <version>${worldguard.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

@@ -10,9 +10,9 @@
   <!-- Encode in UTF-8 -->
   <properties>
     <build.number>-b${BUILD_NUMBER}</build.number>
-    <bukkit.version>1.10-R0.1-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.11-R0.1-SNAPSHOT</bukkit.version>
     <junit.version>4.12</junit.version>
-    <powermock.version>1.6.5</powermock.version>
+    <powermock.version>1.6.6</powermock.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <worldguard.version>6.1.1-SNAPSHOT</worldguard.version>
   </properties>

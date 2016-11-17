@@ -1,6 +1,6 @@
 package de.dustplanet.pickuparrows;
 
-import org.bukkit.craftbukkit.v1_10_R1.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import net.minecraft.server.v1_10_R1.EntityArrow.PickupStatus;
+import net.minecraft.server.v1_11_R1.EntityArrow.PickupStatus;
 
 /**
  * PickupArrows for CraftBukkit/Spigot.

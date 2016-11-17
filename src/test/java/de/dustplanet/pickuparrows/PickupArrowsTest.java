@@ -1,10 +1,11 @@
 package de.dustplanet.pickuparrows;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.support.membermodification.MemberMatcher.defaultConstructorIn;
 import static org.powermock.api.support.membermodification.MemberModifier.suppress;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,7 +44,7 @@ public class PickupArrowsTest {
      */
     @Test
     public void testOnDisable() {
-        List<String> worldList = mock(List.class);
+        List<String> worldList = spy(new ArrayList<String>());
         worldList.add("I'm not empty!");
         plugin.setRegions(worldList);
         plugin.onDisable();

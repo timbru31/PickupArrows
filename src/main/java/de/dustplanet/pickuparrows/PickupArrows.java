@@ -9,6 +9,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * PickupArrows for CraftBukkit/Spigot.
  * Handles general stuff!
@@ -29,19 +32,27 @@ public class PickupArrows extends JavaPlugin {
     /**
      * Boolean to determine if WorldGuard is used.
      */
+    @Getter
+    @Setter
     private boolean usingWorldGuard;
     /**
      * Current status of the blacklist.
      */
+    @Getter
+    @Setter
     private boolean blacklist;
     /**
      * List of WorldGuard regions used for black/whitelist.
      */
+    @Getter
+    @Setter
     private List<String> regions = new ArrayList<>();
     /**
      * WorldGuard instance.
      */
-    private WorldGuardPlugin wg;
+    @Getter
+    @Setter
+    private WorldGuardPlugin worldGuard;
 
     /**
      * Disables PickupArrows and clears region list.
@@ -92,69 +103,5 @@ public class PickupArrows extends JavaPlugin {
 
         // Event
         getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
-    }
-
-    /**
-     * Returns whether WorldGuard is used for regions hook.
-     * @return true or false if whether WorldGuard is used
-     */
-    public boolean isUsingWorldGuard() {
-        return usingWorldGuard;
-    }
-
-    /**
-     * Sets if WorldGuad integration should be used.
-     * @param useWorldGuard boolean to set if WorldGuard should be used
-     */
-    public void setUsingWorldGuard(boolean useWorldGuard) {
-        this.usingWorldGuard = useWorldGuard;
-    }
-
-    /**
-     * Returns the status of the blacklist.
-     * @return the current blacklist status
-     */
-    public boolean isBlacklist() {
-        return blacklist;
-    }
-
-    /**
-     * Enabled or disables the blacklist.
-     * @param blacklist boolean value
-     */
-    public void setBlacklist(boolean blacklist) {
-        this.blacklist = blacklist;
-    }
-
-    /**
-     * Gets the WorldGuard regions.
-     * @return the WorldGuard regions list
-     */
-    public List<String> getRegions() {
-        return regions;
-    }
-
-    /**
-     * Sets for the WorldGuard regions.
-     * @param regions a list of WorldGuard regions
-     */
-    public void setRegions(List<String> regions) {
-        this.regions = regions;
-    }
-
-    /**
-     * Gets the WorldGuard instance.
-     * @return the WorldGuard instance or null
-     */
-    public WorldGuardPlugin getWorldGuard() {
-        return wg;
-    }
-
-    /**
-     *  Sets the WorldGuard instance.
-     * @param wg a WorldGuard instance
-     */
-    public void setWorldGuard(WorldGuardPlugin wg) {
-        this.wg = wg;
     }
 }

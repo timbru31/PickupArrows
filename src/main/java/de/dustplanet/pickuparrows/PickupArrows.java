@@ -17,7 +17,7 @@ import lombok.Setter;
  * Handles general stuff!
  *
  * Refer to the dev.bukkit.org page:
- * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
+ * https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx
  * thanks to mushroomhostage for the original PickupArrows plugin!
@@ -70,7 +70,7 @@ public class PickupArrows extends JavaPlugin {
     public void onEnable() {
         config = getConfig();
         // Add defaults and copy them
-        config.options().header("For help please refer to the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/pickuparrows/");
+        config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", false);
         String[] temp = {"skeleton", "player", "dispenser"};
         for (String s : temp) {

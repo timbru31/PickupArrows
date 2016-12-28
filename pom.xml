@@ -4,7 +4,7 @@
   <artifactId>PickupArrows</artifactId>
   <version>3.0.11-SNAPSHOT</version>
   <name>PickupArrows</name>
-  <url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
+  <url>https://dev.bukkit.org/projects/pickuparrows</url>
   <description>Allows players to pickup arrows from mobs</description>
 
   <!-- Encode in UTF-8 -->

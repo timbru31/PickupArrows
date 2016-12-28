@@ -33,7 +33,7 @@ import net.minecraft.server.v1_11_R1.EntityArrow.PickupStatus;
  * Handles the test cases
  *
  * Refer to the dev.bukkit.org page:
- * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
+ * https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx
  * thanks to Pandarr for the awesome tutorial

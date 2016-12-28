@@ -4,7 +4,7 @@ description: Allows you to pickup arrows
 version: ${project.version}${build.number}
 author: xGhOsTkiLLeRx
 authors: [mushroomhostage]
-website: http://dev.bukkit.org/bukkit-plugins/pickuparrows/
+website: https://dev.bukkit.org/projects/pickuparrows
 permissions:
   pickuparrows.*:
     children:

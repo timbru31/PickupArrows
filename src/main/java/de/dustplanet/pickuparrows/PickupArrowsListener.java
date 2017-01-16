@@ -1,7 +1,7 @@
 package de.dustplanet.pickuparrows;
 
-import org.bukkit.craftbukkit.v1_11_R1.entity.CraftArrow;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Arrow.PickupStatus;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -17,8 +17,6 @@ import org.bukkit.projectiles.ProjectileSource;
 // WorldGuard
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-
-import net.minecraft.server.v1_11_R1.EntityArrow.PickupStatus;
 
 /**
  * PickupArrows for CraftBukkit/Spigot.
@@ -120,7 +118,7 @@ public class PickupArrowsListener implements Listener {
      * @param status PickupStatus (allowed, disallowed, creative only)
      */
     private void setPickup(Arrow arrow, PickupStatus status) {
-        ((CraftArrow) arrow).getHandle().fromPlayer = status;
+        arrow.setPickupStatus(status);
     }
 
     /**
@@ -129,7 +127,7 @@ public class PickupArrowsListener implements Listener {
      * @return PickupStatus (allowed, disallowed, creative only)
      */
     private PickupStatus getPickup(Arrow arrow) {
-        return ((CraftArrow) arrow).getHandle().fromPlayer;
+        return arrow.getPickupStatus();
     }
 
     private boolean onFire(Arrow arrow) {

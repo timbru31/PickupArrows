@@ -4,7 +4,7 @@
   <artifactId>PickupArrows</artifactId>
   <version>3.0.11-SNAPSHOT</version>
   <name>PickupArrows</name>
-  <url>http://dev.bukkit.org/bukkit-plugins/pickuparrows/</url>
+  <url>https://dev.bukkit.org/projects/pickuparrows</url>
   <description>Allows players to pickup arrows from mobs</description>
 
   <!-- Encode in UTF-8 -->
@@ -15,7 +15,7 @@
     <powermock.version>1.6.6</powermock.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <worldguard.version>6.1.1-SNAPSHOT</worldguard.version>
-    <lombok.version>1.16.10</lombok.version>
+    <lombok.version>1.16.12</lombok.version>
   </properties>
 
   <!-- Repositories -->
@@ -26,7 +26,7 @@
     </repository>
     <repository>
       <id>sk89q-repo</id>
-      <url>http://maven.sk89q.com/repo/</url>
+      <url>https://maven.sk89q.com/repo/</url>
     </repository>
   </repositories>
 

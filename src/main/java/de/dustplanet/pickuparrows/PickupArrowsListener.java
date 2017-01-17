@@ -23,7 +23,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  * Handles activities (ProjectileHit)!
  *
  * Refer to the dev.bukkit.org page:
- * http://dev.bukkit.org/bukkit-plugins/pickuparrows/
+ * https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx
  * thanks to mushroomhostage for the original PickupArrows plugin!

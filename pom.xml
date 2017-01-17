@@ -25,10 +25,6 @@
       <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
     </repository>
     <repository>
-      <id>dustplanet</id>
-      <url>https://repo.dustplanet.de/artifactory/craftbukkit/</url>
-    </repository>
-    <repository>
       <id>sk89q-repo</id>
       <url>https://maven.sk89q.com/repo/</url>
     </repository>
@@ -40,17 +36,6 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <version>${bukkit.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bukkit</groupId>
-      <artifactId>craftbukkit</artifactId>
-      <version>${bukkit.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.spigotmc</groupId>
-          <artifactId>minecraft-server</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>com.sk89q</groupId>

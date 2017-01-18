@@ -17,8 +17,8 @@ install:
   - cmd: mvn --version
   - cmd: java -version
 build_script:
-  - mvn -s conf/settings.xml clean package
+  - mvn clean package
 test_script:
-  - mvn -s conf/settings.xml test
+  - mvn test
 cache:
   - C:\maven

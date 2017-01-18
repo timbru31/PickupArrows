@@ -8,7 +8,7 @@ before_install:
   # fix travis-ci/travis-ci#4629
   - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
 install:
-  - mvn -s conf/settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 cache:
   directories:

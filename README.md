@@ -1,4 +1,5 @@
 # PickupArrows
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/684953fa3f2947fcbd766971f954ab1d)](https://www.codacy.com/app/timbru31/PickupArrows?utm_source=github.com&utm_medium=referral&utm_content=timbru31/PickupArrows&utm_campaign=badger)
 [![Build Status](https://ci.dustplanet.de/job/PickupArrows/badge/icon)](https://ci.dustplanet.de/job/PickupArrows/)
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
 [![Circle CI](https://img.shields.io/circleci/project/timbru31/PickupArrows.svg)](https://circleci.com/gh/timbru31/PickupArrows)

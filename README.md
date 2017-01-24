@@ -1,9 +1,9 @@
 # PickupArrows
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/684953fa3f2947fcbd766971f954ab1d)](https://www.codacy.com/app/timbru31/PickupArrows?utm_source=github.com&utm_medium=referral&utm_content=timbru31/PickupArrows&utm_campaign=badger)
 [![Build Status](https://ci.dustplanet.de/job/PickupArrows/badge/icon)](https://ci.dustplanet.de/job/PickupArrows/)
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
 [![Circle CI](https://img.shields.io/circleci/project/timbru31/PickupArrows.svg)](https://circleci.com/gh/timbru31/PickupArrows)
 [![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/684953fa3f2947fcbd766971f954ab1d)](https://www.codacy.com/app/timbru31/PickupArrows?utm_source=github.com&utm_medium=referral&utm_content=timbru31/PickupArrows&utm_campaign=badger)
 [![BukkitDev](https://img.shields.io/badge/BukkitDev-v3.0.10-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
 [![SpigotMC](https://img.shields.io/badge/SpigotMC-v3.0.10-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](LICENSE.md)

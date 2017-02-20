@@ -17,6 +17,10 @@ Special features are
 * WorldGuard support. Black or whitelist regions, where the plugin should be active!
 * Support for normal, fire, spectral or tipped arrows
 
+Third party features, all of them can be disabled
+
+* bStats for usage statistics
+
 ## License
 This plugin is released under the
 *Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)* license.
@@ -79,6 +83,28 @@ For support visit the dev.bukkit.org page: https://dev.bukkit.org/projects/picku
 ## Pull Requests
 Feel free to submit any PRs here. :)
 Please follow the Sun Coding Guidelines, thanks!
+
+## Usage statistics
+
+_stats images are returning soon!_
+
+## Data usage collection of bStats
+
+#### Disabling bStats
+The file _../plugins/bStats/config.yml_ contains an option to opt-out
+
+#### The following data is **read and sent** to https://bstats.org and can be seen under https://bstats.org/plugin/bukkit/PickupArrows
+* Your server's randomly generated UUID
+* The amount of players on your server
+* The online mode of your server
+* The bukkit version of your server
+* The java version of your system (e.g. Java 8)
+* The name of your OS (e.g. Windows)
+* The version of your OS
+* The architecture of your OS (e.g. amd64)
+* The system cores of your OS (e.g. 8)
+* bStats-supported plugins
+* Plugin version of bStats-supported plugins
 
 ## Donation
 [![paypal logo](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donation via PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T9TEV7Q88B9M2)

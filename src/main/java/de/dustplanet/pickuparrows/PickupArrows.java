@@ -3,6 +3,7 @@ package de.dustplanet.pickuparrows;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bstats.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -103,5 +104,7 @@ public class PickupArrows extends JavaPlugin {
 
         // Event
         getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
+
+        new Metrics(this);
     }
 }

@@ -25,20 +25,9 @@ import lombok.Setter;
  */
 
 public class PickupArrows extends JavaPlugin {
-    /**
-     * FileConfiguration used for config values.
-     */
-    private FileConfiguration config;
-    // WordGuard stuff
-    /**
-     * Boolean to determine if WorldGuard is used.
-     */
     @Getter
     @Setter
     private boolean usingWorldGuard;
-    /**
-     * Current status of the blacklist.
-     */
     @Getter
     @Setter
     private boolean blacklist;
@@ -48,29 +37,35 @@ public class PickupArrows extends JavaPlugin {
     @Getter
     @Setter
     private List<String> regions = new ArrayList<>();
-    /**
-     * WorldGuard instance.
-     */
     @Getter
     @Setter
     private WorldGuardPlugin worldGuard;
 
-    /**
-     * Disables PickupArrows and clears region list.
-     */
     @Override
     public void onDisable() {
-        // Make our list empty
         getRegions().clear();
     }
 
-    /**
-     * Enables PickupArrows and loads config values.
-     */
     @Override
     public void onEnable() {
-        config = getConfig();
-        // Add defaults and copy them
+        setConfigDefaults();
+        setUsingWorldGuard(getConfig().getBoolean("useWorldGuard"));
+        if (isUsingWorldGuard()) {
+            setBlacklist(getConfig().getBoolean("useListAsBlacklist"));
+            setRegions(getConfig().getStringList("regions"));
+            Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
+            if (worldGuard != null && worldGuard instanceof WorldGuardPlugin) {
+                setWorldGuard((WorldGuardPlugin) worldGuard);
+            }
+        }
+
+        getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
+
+        new Metrics(this);
+    }
+
+    private void setConfigDefaults() {
+        FileConfiguration config = getConfig();
         config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", false);
         String[] temp = {"skeleton", "player", "dispenser"};
@@ -90,21 +85,5 @@ public class PickupArrows extends JavaPlugin {
         config.addDefault("regions", new ArrayList<String>());
         config.options().copyDefaults(true);
         saveConfig();
-        // WorldGuard regions
-        setUsingWorldGuard(config.getBoolean("useWorldGuard"));
-        if (isUsingWorldGuard()) {
-            setBlacklist(config.getBoolean("useListAsBlacklist"));
-            setRegions(config.getStringList("regions"));
-            // WorldGuard plugin
-            Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
-            if (worldGuard != null && worldGuard instanceof WorldGuardPlugin) {
-                setWorldGuard((WorldGuardPlugin) worldGuard);
-            }
-        }
-
-        // Event
-        getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
-
-        new Metrics(this);
     }
 }

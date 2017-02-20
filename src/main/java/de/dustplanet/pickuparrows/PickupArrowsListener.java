@@ -30,15 +30,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  */
 
 public class PickupArrowsListener implements Listener {
-    /**
-     * PickupArrows instance.
-     */
     private PickupArrows plugin;
 
-    /**
-     * Creates a new PickupArrowsListener instance.
-     * @param instance the PickupArrows instance
-     */
     public PickupArrowsListener(PickupArrows instance) {
         plugin = instance;
     }

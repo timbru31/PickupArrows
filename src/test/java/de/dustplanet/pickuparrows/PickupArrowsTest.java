@@ -1,5 +1,6 @@
 package de.dustplanet.pickuparrows;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.powermock.api.support.membermodification.MemberMatcher.defaultConstructorIn;
@@ -49,5 +50,6 @@ public class PickupArrowsTest {
         plugin.setRegions(worldList);
         plugin.onDisable();
         verify(worldList).clear();
+        assertEquals("worldList should be empty", worldList.size(), 0);
     }
 }

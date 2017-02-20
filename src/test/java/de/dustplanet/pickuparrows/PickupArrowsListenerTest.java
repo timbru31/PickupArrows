@@ -1,5 +1,6 @@
 package de.dustplanet.pickuparrows;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.stub;
@@ -77,12 +78,20 @@ public class PickupArrowsListenerTest {
     public void testWrongEntity() {
         // a null entity should be filtered out
         when(mockEvent.getEntity()).thenReturn(null);
-        listener.onProjectileHitEvent(mockEvent);
+        try {
+            listener.onProjectileHitEvent(mockEvent);
+        } catch(NullPointerException e) {
+            assertNull(e);
+        }
 
         // A Fish is a Projectile, too, but shouldn't pass the entity check
         Projectile fish = mock(FishHook.class);
         when(mockEvent.getEntity()).thenReturn(fish);
-        listener.onProjectileHitEvent(mockEvent);
+        try {
+            listener.onProjectileHitEvent(mockEvent);
+        } catch(ClassCastException e) {
+            assertNull(e);
+        }
     }
 
     @Test

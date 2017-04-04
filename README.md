@@ -109,4 +109,5 @@ The file `./plugins/bStats/config.yml` contains an option to opt-out.
 ## Donation
 [![paypal logo](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donation via PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T9TEV7Q88B9M2)
 
-![BitCoin](https://dustplanet.de/wp-content/uploads/2015/01/bitcoin-logo-plain.png "Donation via BitCoins")   1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C
+![BitCoin](https://dustplanet.de/wp-content/uploads/2015/01/bitcoin-logo-plain.png "Donation via BitCoins")   
+1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C

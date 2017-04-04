@@ -62,12 +62,12 @@ regions: []
 (Fallback to OPs, if no permissions system is found)
 
 #### General permissions
-| Permission node | Description |
-|:----------:|:----------:|
-| pickuparrows.allow.normal | Ability to pickup normal arrows (non burning) |
-| picluparrpws.allow.fire | Ability to pickup fire arrows (burning) |
-| picluparrpws.allow.spectral | Ability to pickup spectral arrows |
-| picluparrpws.allow.tipped | Ability to pickup tipped arrows |
+| Permission node             | Description                                   |
+|:----------------------------|:----------------------------------------------|
+| pickuparrows.allow.normal   | Ability to pickup normal arrows (non burning) |
+| picluparrpws.allow.fire     | Ability to pickup fire arrows (burning)       |
+| picluparrpws.allow.spectral | Ability to pickup spectral arrows             |
+| picluparrpws.allow.tipped   | Ability to pickup tipped arrows               |
 
 
 #### Special permissions
@@ -91,7 +91,7 @@ _stats images are returning soon!_
 ## Data usage collection of bStats
 
 #### Disabling bStats
-The file _../plugins/bStats/config.yml_ contains an option to opt-out
+The file `./plugins/bStats/config.yml` contains an option to opt-out.
 
 #### The following data is **read and sent** to https://bstats.org and can be seen under https://bstats.org/plugin/bukkit/PickupArrows
 * Your server's randomly generated UUID
@@ -109,5 +109,4 @@ The file _../plugins/bStats/config.yml_ contains an option to opt-out
 ## Donation
 [![paypal logo](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donation via PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T9TEV7Q88B9M2)
 
-![bitcoin logo](https://dl.dropboxusercontent.com/u/26476995/bitcoin_logo.png "Donation via BitCoins")<br>
-Address: 1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C
+![BitCoin](https://dustplanet.de/wp-content/uploads/2015/01/bitcoin-logo-plain.png "Donation via BitCoins")   1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C

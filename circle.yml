@@ -1,6 +1,6 @@
 machine:
   java:
-    version: oraclejdk7
+    version: oraclejdk8
 dependencies:
   pre:
     - mvn -version
@@ -9,4 +9,4 @@ dependencies:
     - mvn dependency:resolve
 test:
   override:
-    - mvn clean package
+    - mvn clean package -Pmetrics

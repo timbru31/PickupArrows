@@ -3,7 +3,7 @@ package de.dustplanet.pickuparrows;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bstats.Metrics;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;

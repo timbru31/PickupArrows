@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.dustplanet</groupId>
     <artifactId>bukkit-plugin</artifactId>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.1-SNAPSHOT</version>
     <relativePath />
   </parent>
 
@@ -19,7 +19,7 @@
     <plugin.main>de.dustplanet.pickuparrows.PickupArrows</plugin.main>
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
     <junit.version>4.12</junit.version>
-    <powermock.version>1.7.1</powermock.version>
+    <powermock.version>1.7.3</powermock.version>
     <worldedit.version>6.1.7.3</worldedit.version>
     <worldguard.version>6.2.1</worldguard.version>
     <jdk.version>1.8</jdk.version>

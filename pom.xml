@@ -64,7 +64,7 @@
       <artifactId>mockito-core</artifactId>
       <version>${mockito.core.version}</version>
       <scope>test</scope>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>

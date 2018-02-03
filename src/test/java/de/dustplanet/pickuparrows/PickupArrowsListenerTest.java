@@ -3,7 +3,6 @@ package de.dustplanet.pickuparrows;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.stub;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 
@@ -29,24 +28,21 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * PickupArrows for CraftBukkit/Spigot
- * Handles the test cases
+ * PickupArrows for CraftBukkit/Spigot Handles the test cases
  *
- * Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/pickuparrows
+ * Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
  *
- * @author xGhOsTkiLLeRx
- * thanks to Pandarr for the awesome tutorial
+ * @author xGhOsTkiLLeRx thanks to Pandarr for the awesome tutorial
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({ ProjectileHitEvent.class, PickupArrowsListener.class})
+@PrepareForTest({ ProjectileHitEvent.class, PickupArrowsListener.class })
 public class PickupArrowsListenerTest {
     private ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
     private PickupArrowsListener listener;
     private PickupArrows plugin;
     private Projectile arrow = mock(Arrow.class);
-    private String[] cazes = {"player", "dispenser", "skeleton", "unknown"};
+    private String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
 
     @Before
     public void initialize() {
@@ -80,7 +76,7 @@ public class PickupArrowsListenerTest {
         when(mockEvent.getEntity()).thenReturn(null);
         try {
             listener.onProjectileHitEvent(mockEvent);
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             assertNull(e);
         }
 
@@ -89,7 +85,7 @@ public class PickupArrowsListenerTest {
         when(mockEvent.getEntity()).thenReturn(fish);
         try {
             listener.onProjectileHitEvent(mockEvent);
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             assertNull(e);
         }
     }
@@ -102,11 +98,11 @@ public class PickupArrowsListenerTest {
                 shooter = mock(Player.class);
             } else if (caze.equalsIgnoreCase("skeleton")) {
                 shooter = mock(Skeleton.class);
-                stub(((LivingEntity) shooter).getType()).toReturn(EntityType.SKELETON);
+                when(((LivingEntity) shooter).getType()).thenReturn(EntityType.SKELETON);
             } else if (caze.equalsIgnoreCase("dispenser")) {
                 shooter = mock(BlockProjectileSource.class);
                 Block stubbedBlock = mock(Block.class);
-                stub(((BlockProjectileSource) shooter).getBlock()).toReturn(stubbedBlock);
+                when(((BlockProjectileSource) shooter).getBlock()).thenReturn(stubbedBlock);
                 when(stubbedBlock.getType()).thenReturn(Material.DISPENSER);
             } else {
                 shooter = null;
@@ -115,8 +111,8 @@ public class PickupArrowsListenerTest {
             when(mockEvent.getEntity().getShooter()).thenReturn(shooter);
 
             // Iterate through permission values
-            boolean v[] = {false, true};
-            for (boolean value: v) {
+            boolean v[] = { false, true };
+            for (boolean value : v) {
                 usePermissions(value);
                 // Defaults
                 when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(true);

@@ -8,7 +8,6 @@ jdk:
   - oraclejdk8
   - oraclejdk9
   - openjdk8
-  - openjdk9
 
 before_install:
   - java -version

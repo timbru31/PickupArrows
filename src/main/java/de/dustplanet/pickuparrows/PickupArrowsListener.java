@@ -19,14 +19,10 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 /**
- * PickupArrows for CraftBukkit/Spigot.
- * Handles activities (ProjectileHit)!
- *
- * Refer to the dev.bukkit.org page:
+ * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page:
  * https://dev.bukkit.org/projects/pickuparrows
  *
- * @author xGhOsTkiLLeRx
- * thanks to mushroomhostage for the original PickupArrows plugin!
+ * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
 
 public class PickupArrowsListener implements Listener {
@@ -38,6 +34,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Event called when a projectile lands.
+     * 
      * @param event a ProjectileHitEvent
      */
     @EventHandler
@@ -61,7 +58,7 @@ public class PickupArrowsListener implements Listener {
         } else if (shooter instanceof BlockProjectileSource) {
             shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase();
         } else if (shooter instanceof LivingEntity) {
-            shooterName  = ((LivingEntity) shooter).getType().toString().toLowerCase();
+            shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase();
         }
 
         // Return if arrow is creative
@@ -71,7 +68,8 @@ public class PickupArrowsListener implements Listener {
 
         // Make WorldGuard check
         if (plugin.isUsingWorldGuard() && plugin.getWorldGuard() != null) {
-            ApplicableRegionSet regionList = plugin.getWorldGuard().getRegionManager(arrow.getWorld()).getApplicableRegions(arrow.getLocation());
+            ApplicableRegionSet regionList = plugin.getWorldGuard().getRegionManager(arrow.getWorld())
+                    .getApplicableRegions(arrow.getLocation());
             // If we use a whitelist and no regions are here, cancel
             if (regionList.size() == 0 && !plugin.isBlacklist()) {
                 return;
@@ -107,6 +105,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Sets whether the arrow is from a player or not.
+     * 
      * @param arrow to change
      * @param status PickupStatus (allowed, disallowed, creative only)
      */
@@ -116,6 +115,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Returns the current pickup state of an arrow.
+     * 
      * @param arrow the arrow
      * @return PickupStatus (allowed, disallowed, creative only)
      */
@@ -140,6 +140,7 @@ public class PickupArrowsListener implements Listener {
         return arrow instanceof SpectralArrow;
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler
     public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
         if (!plugin.getConfig().getBoolean("usePermissions", false)) {

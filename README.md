@@ -6,8 +6,8 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/684953fa3f2947fcbd766971f954ab1d)](https://www.codacy.com/app/timbru31/PickupArrows?utm_source=github.com&utm_medium=referral&utm_content=timbru31/PickupArrows&utm_campaign=badger)
 
-[![BukkitDev](https://img.shields.io/badge/BukkitDev-v3.0.11-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
-[![SpigotMC](https://img.shields.io/badge/SpigotMC-v3.0.11-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v3.1.0-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
+[![SpigotMC](https://img.shields.io/badge/SpigotMC-v3.1.0-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 

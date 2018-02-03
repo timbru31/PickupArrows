@@ -9,7 +9,7 @@
 [![BukkitDev](https://img.shields.io/badge/BukkitDev-v3.0.11-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
 [![SpigotMC](https://img.shields.io/badge/SpigotMC-v3.0.11-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
 
-[![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Info
 This CraftBukkit/Spigot plugin aims to offer the ability to pickup arrows from various source up again.
@@ -24,11 +24,6 @@ Special features are
 Third party features, all of them can be disabled
 
 * bStats for usage statistics
-
-## License
-This plugin is released under the
-*Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)* license.
-Please see [LICENSE.md](LICENSE.md) for more information.
 
 ## Standard config
 To add new mobs/blocks just add the name in lowercase(!) like the scheme to the config.
@@ -127,3 +122,8 @@ The file `./plugins/bStats/config.yml` contains an option to opt-out.
 
 ![BitCoin](https://dustplanet.de/wp-content/uploads/2015/01/bitcoin-logo-plain.png "Donation via BitCoins")   
 1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C
+
+
+---
+Built by (c) Tim Brust and contributors. Released under the MIT license.  
+Originally released under the BSD-3 license by Mushroom Hostage

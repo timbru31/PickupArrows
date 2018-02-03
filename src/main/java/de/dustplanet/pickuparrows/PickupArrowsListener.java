@@ -34,7 +34,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Event called when a projectile lands.
-     * 
+     *
      * @param event a ProjectileHitEvent
      */
     @EventHandler
@@ -105,7 +105,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Sets whether the arrow is from a player or not.
-     * 
+     *
      * @param arrow to change
      * @param status PickupStatus (allowed, disallowed, creative only)
      */
@@ -115,7 +115,7 @@ public class PickupArrowsListener implements Listener {
 
     /**
      * Returns the current pickup state of an arrow.
-     * 
+     *
      * @param arrow the arrow
      * @return PickupStatus (allowed, disallowed, creative only)
      */
@@ -143,6 +143,13 @@ public class PickupArrowsListener implements Listener {
     @SuppressWarnings("deprecation")
     @EventHandler
     public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
+        Player player = event.getPlayer();
+
+        if (plugin.getDisabledPlayers().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+            return;
+        }
+
         if (!plugin.getConfig().getBoolean("usePermissions", false)) {
             return;
         }
@@ -150,8 +157,6 @@ public class PickupArrowsListener implements Listener {
         boolean onFire = onFire(arrow);
         boolean isSpectral = isSpectral(arrow);
         boolean isTipped = isTipped(arrow);
-
-        Player player = event.getPlayer();
 
         if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
             event.setCancelled(true);

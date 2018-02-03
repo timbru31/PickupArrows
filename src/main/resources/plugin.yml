@@ -5,6 +5,10 @@ version: ${project.version}${build.number}
 author: xGhOsTkiLLeRx
 authors: [mushroomhostage]
 website: https://dev.bukkit.org/projects/pickuparrows
+commands:
+  pickuparrows:
+    description: Toggles whether arrows should be picked up
+    aliases: [pa, arrow, arrows, pickuparrow]
 permissions:
   pickuparrows.*:
     children:

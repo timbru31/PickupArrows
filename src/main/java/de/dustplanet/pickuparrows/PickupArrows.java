@@ -2,6 +2,7 @@ package de.dustplanet.pickuparrows;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,14 +15,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * PickupArrows for CraftBukkit/Spigot.
- * Handles general stuff!
- *
- * Refer to the dev.bukkit.org page:
+ * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page:
  * https://dev.bukkit.org/projects/pickuparrows
  *
- * @author xGhOsTkiLLeRx
- * thanks to mushroomhostage for the original PickupArrows plugin!
+ * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
 
 public class PickupArrows extends JavaPlugin {
@@ -41,9 +38,13 @@ public class PickupArrows extends JavaPlugin {
     @Setter
     private WorldGuardPlugin worldGuard;
 
+    @Getter
+    private List<UUID> disabledPlayers = new ArrayList<>();
+
     @Override
     public void onDisable() {
         getRegions().clear();
+        getDisabledPlayers().clear();
     }
 
     @Override
@@ -61,6 +62,8 @@ public class PickupArrows extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
 
+        getServer().getPluginCommand("pickuparrows").setExecutor(new PickupArrowsCommandExecutor(this));
+
         new Metrics(this);
     }
 
@@ -68,7 +71,7 @@ public class PickupArrows extends JavaPlugin {
         FileConfiguration config = getConfig();
         config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", false);
-        String[] temp = {"skeleton", "player", "dispenser"};
+        String[] temp = { "skeleton", "player", "dispenser" };
         for (String s : temp) {
             config.addDefault("pickupFrom." + s + ".fire", true);
             config.addDefault("pickupFrom." + s + ".normal", true);

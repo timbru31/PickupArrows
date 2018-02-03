@@ -11,7 +11,7 @@ _job_base: &job_base
         paths:
           - ~/.m2
         key: pickup-arrows-{{ checksum "pom.xml" }}
-    - run: mvn clean package -Pmetrics
+    - run: mvn clean test
 
 version: 2
 jobs:

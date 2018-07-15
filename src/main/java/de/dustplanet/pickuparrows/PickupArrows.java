@@ -47,6 +47,7 @@ public class PickupArrows extends JavaPlugin {
         getDisabledPlayers().clear();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void onEnable() {
         setConfigDefaults();
@@ -54,9 +55,9 @@ public class PickupArrows extends JavaPlugin {
         if (isUsingWorldGuard()) {
             setBlacklist(getConfig().getBoolean("useListAsBlacklist"));
             setRegions(getConfig().getStringList("regions"));
-            Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
-            if (worldGuard != null && worldGuard instanceof WorldGuardPlugin) {
-                setWorldGuard((WorldGuardPlugin) worldGuard);
+            Plugin worldGuardPlugin = getServer().getPluginManager().getPlugin("WorldGuard");
+            if (worldGuardPlugin != null && worldGuardPlugin instanceof WorldGuardPlugin) {
+                setWorldGuard((WorldGuardPlugin) worldGuardPlugin);
             }
         }
 

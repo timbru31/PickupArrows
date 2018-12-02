@@ -15,8 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/pickuparrows
+ * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
@@ -47,7 +46,6 @@ public class PickupArrows extends JavaPlugin {
         getDisabledPlayers().clear();
     }
 
-    @SuppressWarnings("unused")
     @Override
     public void onEnable() {
         setConfigDefaults();
@@ -56,8 +54,8 @@ public class PickupArrows extends JavaPlugin {
             setBlacklist(getConfig().getBoolean("useListAsBlacklist"));
             setRegions(getConfig().getStringList("regions"));
             Plugin worldGuardPlugin = getServer().getPluginManager().getPlugin("WorldGuard");
-            if (worldGuardPlugin != null && worldGuardPlugin instanceof WorldGuardPlugin) {
-                setWorldGuard((WorldGuardPlugin) worldGuardPlugin);
+            if (worldGuardPlugin == null) {
+                setUsingWorldGuard(false);
             }
         }
 

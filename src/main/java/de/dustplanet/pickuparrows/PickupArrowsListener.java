@@ -14,13 +14,16 @@ import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 // WorldGuard
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import com.sk89q.worldguard.protection.regions.RegionContainer;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/pickuparrows
+ * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
@@ -67,9 +70,10 @@ public class PickupArrowsListener implements Listener {
         }
 
         // Make WorldGuard check
-        if (plugin.isUsingWorldGuard() && plugin.getWorldGuard() != null) {
-            ApplicableRegionSet regionList = plugin.getWorldGuard().getRegionManager(arrow.getWorld())
-                    .getApplicableRegions(arrow.getLocation());
+        if (plugin.isUsingWorldGuard()) {
+            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = regionContainer.createQuery();
+            ApplicableRegionSet regionList = query.getApplicableRegions(BukkitAdapter.adapt(arrow.getLocation()));
             // If we use a whitelist and no regions are here, cancel
             if (regionList.size() == 0 && !plugin.isBlacklist()) {
                 return;

@@ -9,8 +9,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,9 +31,6 @@ public class PickupArrows extends JavaPlugin {
     @Getter
     @Setter
     private List<String> regions = new ArrayList<>();
-    @Getter
-    @Setter
-    private WorldGuardPlugin worldGuard;
 
     @Getter
     private List<UUID> disabledPlayers = new ArrayList<>();

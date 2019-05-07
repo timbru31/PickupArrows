@@ -1,7 +1,7 @@
 package de.dustplanet.pickuparrows;
 
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Arrow.PickupStatus;
+import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;

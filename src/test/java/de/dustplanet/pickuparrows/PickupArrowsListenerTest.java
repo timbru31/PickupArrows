@@ -9,8 +9,8 @@ import static org.mockito.Mockito.when;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Arrow.PickupStatus;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.LivingEntity;
@@ -41,7 +41,7 @@ public class PickupArrowsListenerTest {
     private ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
     private PickupArrowsListener listener;
     private PickupArrows plugin;
-    private Projectile arrow = mock(Arrow.class);
+    private Projectile arrow = mock(AbstractArrow.class);
     private String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
 
     @Before

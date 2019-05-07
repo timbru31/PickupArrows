@@ -1,6 +1,6 @@
 package de.dustplanet.pickuparrows;
 
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -44,11 +44,11 @@ public class PickupArrowsListener implements Listener {
     public void onProjectileHitEvent(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
         // Arrow?
-        if (projectile == null || !(projectile instanceof Arrow)) {
+        if (projectile == null || !(projectile instanceof AbstractArrow)) {
             return;
         }
         // Get data
-        Arrow arrow = (Arrow) projectile;
+        AbstractArrow arrow = (AbstractArrow) projectile;
         ProjectileSource shooter = projectile.getShooter();
 
         boolean onFire = onFire(arrow);
@@ -113,7 +113,7 @@ public class PickupArrowsListener implements Listener {
      * @param arrow to change
      * @param status PickupStatus (allowed, disallowed, creative only)
      */
-    private void setPickup(Arrow arrow, PickupStatus status) {
+    private void setPickup(AbstractArrow arrow, PickupStatus status) {
         arrow.setPickupStatus(status);
     }
 
@@ -123,11 +123,11 @@ public class PickupArrowsListener implements Listener {
      * @param arrow the arrow
      * @return PickupStatus (allowed, disallowed, creative only)
      */
-    private PickupStatus getPickup(Arrow arrow) {
+    private PickupStatus getPickup(AbstractArrow arrow) {
         return arrow.getPickupStatus();
     }
 
-    private boolean onFire(Arrow arrow) {
+    private boolean onFire(AbstractArrow arrow) {
         boolean onFire = false;
         if (arrow.getFireTicks() > 0) {
             onFire = true;
@@ -135,12 +135,12 @@ public class PickupArrowsListener implements Listener {
         return onFire;
     }
 
-    private boolean isTipped(Arrow arrow) {
+    private boolean isTipped(AbstractArrow arrow) {
         return arrow instanceof TippedArrow;
 
     }
 
-    private boolean isSpectral(Arrow arrow) {
+    private boolean isSpectral(AbstractArrow arrow) {
         return arrow instanceof SpectralArrow;
     }
 
@@ -157,7 +157,7 @@ public class PickupArrowsListener implements Listener {
         if (!plugin.getConfig().getBoolean("usePermissions", false)) {
             return;
         }
-        Arrow arrow = event.getArrow();
+        AbstractArrow arrow = event.getArrow();
         boolean onFire = onFire(arrow);
         boolean isSpectral = isSpectral(arrow);
         boolean isTipped = isTipped(arrow);

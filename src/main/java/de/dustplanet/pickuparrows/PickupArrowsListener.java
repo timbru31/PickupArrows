@@ -67,12 +67,6 @@ public class PickupArrowsListener implements Listener {
         } else if (shooter instanceof LivingEntity) {
             shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase();
         }
-        System.out.println(shooterName);
-        System.out.println(arrow.getPickupStatus());
-        System.out.println("fire " + onFire);
-        System.out.println("spec " + isSpectral);
-        System.out.println("tipped " + isTipped);
-        System.out.println("trident " + isTrident);
 
         // Return if arrow is creative
         if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == PickupStatus.CREATIVE_ONLY) {

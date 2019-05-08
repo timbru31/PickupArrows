@@ -6,21 +6,31 @@ pickupFrom:
     normal: true
     spectral: true
     tipped: true
+    trident: true
   player:
     fire: true
     normal: true
     spectral: true
     tipped: true
+    trident: true
   dispenser:
     fire: true
     normal: true
     spectral: true
     tipped: true
+    trident: true
+  drowned:
+    fire: true
+    normal: true
+    spectral: true
+    tipped: true
+    trident: true
   unknown:
     fire: false
     normal: false
     spectral: false
     tipped: false
+    trident: false
 ignoreCreativeArrows: false
 useWorldGuard: false
 useListAsBlacklist: false

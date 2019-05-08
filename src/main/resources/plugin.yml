@@ -21,6 +21,7 @@ permissions:
         pickuparrows.allow.normal: true
         pickuparrows.allow.spectral: true
         pickuparrows.allow.tipped: true
+        pickuparrows.allow.trident: true
     default: op
   pickuparrows.allow.fire:
     default: op
@@ -29,5 +30,7 @@ permissions:
   pickuparrows.allow.spectral:
     default: op
   pickuparrows.allow.tipped:
+    default: op
+  pickuparrows.allow.trident:
     default: op
 softdepend: [WorldGuard]

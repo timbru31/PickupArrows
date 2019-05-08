@@ -2,15 +2,17 @@ package de.dustplanet.pickuparrows;
 
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.SpectralArrow;
-import org.bukkit.entity.TippedArrow;
+import org.bukkit.entity.Trident;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -23,7 +25,8 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
+ * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page:
+ * https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
@@ -54,6 +57,7 @@ public class PickupArrowsListener implements Listener {
         boolean onFire = onFire(arrow);
         boolean isSpectral = isSpectral(arrow);
         boolean isTipped = isTipped(arrow);
+        boolean isTrident = isTrident(arrow);
 
         String shooterName = "unknown";
         if (shooter instanceof Player) {
@@ -63,6 +67,12 @@ public class PickupArrowsListener implements Listener {
         } else if (shooter instanceof LivingEntity) {
             shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase();
         }
+        System.out.println(shooterName);
+        System.out.println(arrow.getPickupStatus());
+        System.out.println("fire " + onFire);
+        System.out.println("spec " + isSpectral);
+        System.out.println("tipped " + isTipped);
+        System.out.println("trident " + isTrident);
 
         // Return if arrow is creative
         if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == PickupStatus.CREATIVE_ONLY) {
@@ -104,6 +114,8 @@ public class PickupArrowsListener implements Listener {
             setPickup(arrow, PickupStatus.ALLOWED);
         } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
             setPickup(arrow, PickupStatus.ALLOWED);
+        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".trident") && isTrident) {
+            setPickup(arrow, PickupStatus.ALLOWED);
         }
     }
 
@@ -136,12 +148,16 @@ public class PickupArrowsListener implements Listener {
     }
 
     private boolean isTipped(AbstractArrow arrow) {
-        return arrow instanceof TippedArrow;
+        return ((Arrow) arrow).getBasePotionData().getType() != PotionType.UNCRAFTABLE;
 
     }
 
     private boolean isSpectral(AbstractArrow arrow) {
         return arrow instanceof SpectralArrow;
+    }
+
+    private boolean isTrident(AbstractArrow arrow) {
+        return arrow instanceof Trident;
     }
 
     @SuppressWarnings("deprecation")
@@ -161,6 +177,7 @@ public class PickupArrowsListener implements Listener {
         boolean onFire = onFire(arrow);
         boolean isSpectral = isSpectral(arrow);
         boolean isTipped = isTipped(arrow);
+        boolean isTrident = isTrident(arrow);
 
         if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
             event.setCancelled(true);
@@ -169,6 +186,8 @@ public class PickupArrowsListener implements Listener {
         } else if (isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.spectral")) {
             event.setCancelled(true);
         } else if (!isSpectral && isTipped && !player.hasPermission("pickuparrows.allow.tipped")) {
+            event.setCancelled(true);
+        } else if (isTrident && !player.hasPermission("pickuparrows.allow.trident")) {
             event.setCancelled(true);
         }
     }

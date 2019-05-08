@@ -13,7 +13,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
+ * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page:
+ * https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
  */
@@ -65,17 +66,19 @@ public class PickupArrows extends JavaPlugin {
         FileConfiguration config = getConfig();
         config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", false);
-        String[] temp = { "skeleton", "player", "dispenser" };
+        String[] temp = { "skeleton", "player", "dispenser", "drowned" };
         for (String s : temp) {
             config.addDefault("pickupFrom." + s + ".fire", true);
             config.addDefault("pickupFrom." + s + ".normal", true);
             config.addDefault("pickupFrom." + s + ".spectral", true);
             config.addDefault("pickupFrom." + s + ".tipped", true);
+            config.addDefault("pickupFrom." + s + ".trident", true);
         }
         config.addDefault("pickupFrom.unknown.fire", false);
         config.addDefault("pickupFrom.unknown.normal", false);
         config.addDefault("pickupFrom.unknown.spectral", false);
         config.addDefault("pickupFrom.unknown.tipped", false);
+        config.addDefault("pickupFrom.unknown.trident", false);
         config.addDefault("ignoreCreativeArrows", false);
         config.addDefault("useWorldGuard", false);
         config.addDefault("useListAsBlacklist", false);

@@ -9,8 +9,8 @@ import static org.mockito.Mockito.when;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.LivingEntity;
@@ -28,9 +28,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
- * PickupArrows for CraftBukkit/Spigot Handles the test cases
- *
- * Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
+ * PickupArrows for CraftBukkit/Spigot Handles the test cases Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
  *
  * @author xGhOsTkiLLeRx thanks to Pandarr for the awesome tutorial
  */
@@ -41,7 +39,7 @@ public class PickupArrowsListenerTest {
     private ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
     private PickupArrowsListener listener;
     private PickupArrows plugin;
-    private Projectile arrow = mock(AbstractArrow.class);
+    private Projectile arrow = mock(Arrow.class);
     private String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
 
     @Before
@@ -60,6 +58,7 @@ public class PickupArrowsListenerTest {
             PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.ALLOWED);
             PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.DISALLOWED);
             PowerMockito.doReturn(PickupStatus.DISALLOWED).when(listener, "getPickup", arrow);
+            PowerMockito.doReturn(false).when(listener, "isTipped", arrow);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,7 +67,6 @@ public class PickupArrowsListenerTest {
     /**
      * Test method for
      * {@link de.dustplanet.pickuparrows.PickupArrowsListener#onProjectileHitEvent(org.bukkit.event.entity.ProjectileHitEvent)}
-     *
      */
     @Test
     public void testWrongEntity() {

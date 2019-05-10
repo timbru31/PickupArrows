@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
 [![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
 
-[![BukkitDev](https://img.shields.io/badge/BukkitDev-v6.1.0-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
-[![SpigotMC](https://img.shields.io/badge/SpigotMC-v6.1.0-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v6.2.0-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
+[![SpigotMC](https://img.shields.io/badge/SpigotMC-v6.2.0-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -17,6 +17,7 @@ Special features are
 * WorldGuard support. Black or whitelist regions, where the plugin should be active!
 * Support for normal, fire, spectral or tipped arrows and tridents
 * Command to toggle the status of picking up arrows
+* Crossbow, Drowned and Pillager support
 
 Third party features, all of them can be disabled
 
@@ -40,6 +41,11 @@ pickupFrom:
     spectral: true
     tipped: true
     trident: true
+    crossbow:
+      fire: true
+      normal: true
+      spectral: true
+      tipped: true
   dispenser:
     fire: true
     normal: true
@@ -47,6 +53,12 @@ pickupFrom:
     tipped: true
     trident: true
   drowned:
+    fire: true
+    normal: true
+    spectral: true
+    tipped: true
+    trident: true
+  pillager:
     fire: true
     normal: true
     spectral: true
@@ -62,6 +74,7 @@ ignoreCreativeArrows: false
 useWorldGuard: false
 useListAsBlacklist: false
 regions: []
+
 ```
 
 ## Permissions

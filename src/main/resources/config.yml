@@ -13,6 +13,11 @@ pickupFrom:
     spectral: true
     tipped: true
     trident: true
+    crossbow:
+      fire: true
+      normal: true
+      spectral: true
+      tipped: true
   dispenser:
     fire: true
     normal: true
@@ -20,6 +25,12 @@ pickupFrom:
     tipped: true
     trident: true
   drowned:
+    fire: true
+    normal: true
+    spectral: true
+    tipped: true
+    trident: true
+  pillager:
     fire: true
     normal: true
     spectral: true

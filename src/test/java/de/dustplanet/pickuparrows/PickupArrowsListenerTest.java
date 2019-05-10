@@ -18,6 +18,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 import org.junit.Before;
@@ -89,13 +92,19 @@ public class PickupArrowsListenerTest {
     }
 
     @Test
-    public void testCases() {
+    public void testCases() throws Exception {
         for (String caze : cazes) {
             ProjectileSource shooter;
             if (caze.equalsIgnoreCase("player")) {
                 shooter = mock(Player.class);
+                PlayerInventory inv = mock(PlayerInventory.class);
+                PowerMockito.doReturn(new ItemStack(Material.BOW)).when(inv, "getItemInMainHand");
+                PowerMockito.doReturn(inv).when(shooter, "getInventory");
             } else if (caze.equalsIgnoreCase("skeleton")) {
                 shooter = mock(Skeleton.class);
+                EntityEquipment eqipment = mock(EntityEquipment.class);
+                PowerMockito.doReturn(new ItemStack(Material.BOW)).when(eqipment, "getItemInMainHand");
+                PowerMockito.doReturn(eqipment).when(shooter, "getEquipment");
                 when(((LivingEntity) shooter).getType()).thenReturn(EntityType.SKELETON);
             } else if (caze.equalsIgnoreCase("dispenser")) {
                 shooter = mock(BlockProjectileSource.class);

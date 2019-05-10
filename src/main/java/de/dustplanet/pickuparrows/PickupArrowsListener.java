@@ -1,5 +1,6 @@
 package de.dustplanet.pickuparrows;
 
+import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
@@ -62,6 +63,10 @@ public class PickupArrowsListener implements Listener {
         String shooterName = "unknown";
         if (shooter instanceof Player) {
             shooterName = "player";
+            boolean isCrossbow = ((Player) shooter).getInventory().getItemInMainHand().getType() == Material.CROSSBOW;
+            if (isCrossbow) {
+                shooterName += ".crossbow";
+            }
         } else if (shooter instanceof BlockProjectileSource) {
             shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase();
         } else if (shooter instanceof LivingEntity) {

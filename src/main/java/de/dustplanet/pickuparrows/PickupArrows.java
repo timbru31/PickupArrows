@@ -66,7 +66,7 @@ public class PickupArrows extends JavaPlugin {
         FileConfiguration config = getConfig();
         config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", false);
-        String[] temp = { "skeleton", "player", "dispenser", "drowned" };
+        String[] temp = { "skeleton", "player", "dispenser", "drowned", "pillager" };
         for (String s : temp) {
             config.addDefault("pickupFrom." + s + ".fire", true);
             config.addDefault("pickupFrom." + s + ".normal", true);
@@ -74,6 +74,10 @@ public class PickupArrows extends JavaPlugin {
             config.addDefault("pickupFrom." + s + ".tipped", true);
             config.addDefault("pickupFrom." + s + ".trident", true);
         }
+        config.addDefault("pickupFrom.player.crossbow.fire", true);
+        config.addDefault("pickupFrom.player.crossbow.normal", true);
+        config.addDefault("pickupFrom.player.crossbow.spectral", true);
+        config.addDefault("pickupFrom.player.crossbow.tipped", true);
         config.addDefault("pickupFrom.unknown.fire", false);
         config.addDefault("pickupFrom.unknown.normal", false);
         config.addDefault("pickupFrom.unknown.spectral", false);

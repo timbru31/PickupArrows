@@ -104,17 +104,20 @@ public class PickupArrowsListener implements Listener {
         if (!plugin.getConfig().contains("pickupFrom." + shooterName)) {
             shooterName = "unknown";
         }
-        // New check for flexible configuration
-        if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
-            setPickup(arrow, PickupStatus.ALLOWED);
-        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire && !isSpectral && !isTipped) {
-            setPickup(arrow, PickupStatus.ALLOWED);
-        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral") && isSpectral && !isTipped) {
-            setPickup(arrow, PickupStatus.ALLOWED);
-        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
-            setPickup(arrow, PickupStatus.ALLOWED);
-        } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".trident") && isTrident) {
-            setPickup(arrow, PickupStatus.ALLOWED);
+        if (isTrident) {
+            if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".trident")) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            }
+        } else {
+            if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire && !isSpectral && !isTipped) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral") && isSpectral && !isTipped) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
+                setPickup(arrow, PickupStatus.ALLOWED);
+            }
         }
     }
 
@@ -147,7 +150,7 @@ public class PickupArrowsListener implements Listener {
     }
 
     private boolean isTipped(AbstractArrow arrow) {
-        return ((Arrow) arrow).getBasePotionData().getType() != PotionType.UNCRAFTABLE;
+        return arrow instanceof Arrow && ((Arrow) arrow).getBasePotionData().getType() != PotionType.UNCRAFTABLE;
 
     }
 

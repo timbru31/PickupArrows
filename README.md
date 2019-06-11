@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
 [![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
 
-[![BukkitDev](https://img.shields.io/badge/BukkitDev-v6.2.0-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
-[![SpigotMC](https://img.shields.io/badge/SpigotMC-v6.2.0-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v6.2.1-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
+[![SpigotMC](https://img.shields.io/badge/SpigotMC-v6.2.1-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 

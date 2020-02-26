@@ -20,6 +20,7 @@ import lombok.Setter;
  */
 
 public class PickupArrows extends JavaPlugin {
+    private static final int BSTATS_PLUGIN_ID = 284;
     @Getter
     @Setter
     private boolean usingWorldGuard;
@@ -42,6 +43,7 @@ public class PickupArrows extends JavaPlugin {
         getDisabledPlayers().clear();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void onEnable() {
         setConfigDefaults();
@@ -59,7 +61,7 @@ public class PickupArrows extends JavaPlugin {
 
         getServer().getPluginCommand("pickuparrows").setExecutor(new PickupArrowsCommandExecutor(this));
 
-        new Metrics(this);
+        new Metrics(this, BSTATS_PLUGIN_ID);
     }
 
     private void setConfigDefaults() {

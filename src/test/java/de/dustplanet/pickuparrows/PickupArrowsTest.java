@@ -56,7 +56,7 @@ public class PickupArrowsTest {
         plugin.onDisable();
         verify(worldList).clear();
         verify(disabledPlayersList).clear();
-        assertEquals("worldList should be empty", worldList.size(), 0);
-        assertEquals("disabledPlayersList should be empty", disabledPlayersList.size(), 0);
+        assertEquals("worldList should be empty", 0, worldList.size());
+        assertEquals("disabledPlayersList should be empty", 0, disabledPlayersList.size());
     }
 }

@@ -95,18 +95,18 @@ public class PickupArrowsListenerTest {
     public void testCases() throws Exception {
         for (String caze : cazes) {
             ProjectileSource shooter;
-            if (caze.equalsIgnoreCase("player")) {
+            if ("player".equalsIgnoreCase(caze)) {
                 shooter = mock(Player.class);
                 PlayerInventory inv = mock(PlayerInventory.class);
                 PowerMockito.doReturn(new ItemStack(Material.BOW)).when(inv, "getItemInMainHand");
                 PowerMockito.doReturn(inv).when(shooter, "getInventory");
-            } else if (caze.equalsIgnoreCase("skeleton")) {
+            } else if ("skeleton".equalsIgnoreCase(caze)) {
                 shooter = mock(Skeleton.class);
                 EntityEquipment eqipment = mock(EntityEquipment.class);
                 PowerMockito.doReturn(new ItemStack(Material.BOW)).when(eqipment, "getItemInMainHand");
                 PowerMockito.doReturn(eqipment).when(shooter, "getEquipment");
                 when(((LivingEntity) shooter).getType()).thenReturn(EntityType.SKELETON);
-            } else if (caze.equalsIgnoreCase("dispenser")) {
+            } else if ("dispenser".equalsIgnoreCase(caze)) {
                 shooter = mock(BlockProjectileSource.class);
                 Block stubbedBlock = mock(Block.class);
                 when(((BlockProjectileSource) shooter).getBlock()).thenReturn(stubbedBlock);

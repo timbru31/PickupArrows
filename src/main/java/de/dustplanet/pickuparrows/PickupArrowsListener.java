@@ -1,5 +1,7 @@
 package de.dustplanet.pickuparrows;
 
+import java.util.Locale;
+
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
@@ -47,8 +49,7 @@ public class PickupArrowsListener implements Listener {
     @EventHandler
     public void onProjectileHitEvent(ProjectileHitEvent event) {
         Projectile projectile = event.getEntity();
-        // Arrow?
-        if (projectile == null || !(projectile instanceof AbstractArrow)) {
+        if (!(projectile instanceof AbstractArrow)) {
             return;
         }
         // Get data
@@ -68,7 +69,7 @@ public class PickupArrowsListener implements Listener {
                 shooterName += ".crossbow";
             }
         } else if (shooter instanceof BlockProjectileSource) {
-            shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase();
+            shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase(Locale.ENGLISH);
         } else if (shooter instanceof LivingEntity) {
             shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase();
         }
@@ -109,13 +110,13 @@ public class PickupArrowsListener implements Listener {
                 setPickup(arrow, PickupStatus.ALLOWED);
             }
         } else {
-            if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire") && onFire) {
+            if (onFire && plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".fire")) {
                 setPickup(arrow, PickupStatus.ALLOWED);
-            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal") && !onFire && !isSpectral && !isTipped) {
+            } else if (!onFire && !isSpectral && !isTipped && plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".normal")) {
                 setPickup(arrow, PickupStatus.ALLOWED);
-            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral") && isSpectral && !isTipped) {
+            } else if (isSpectral && !isTipped && plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".spectral")) {
                 setPickup(arrow, PickupStatus.ALLOWED);
-            } else if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped") && !isSpectral && isTipped) {
+            } else if (!isSpectral && isTipped && plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".tipped")) {
                 setPickup(arrow, PickupStatus.ALLOWED);
             }
         }

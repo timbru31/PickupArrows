@@ -21,7 +21,7 @@
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
     <bukkit.version>1.15.1-R0.1-SNAPSHOT</bukkit.version>
     <junit.version>4.12</junit.version>
-    <mockito.core.version>2.28.2</mockito.core.version>
+    <mockito.core.version>3.3.0</mockito.core.version>
     <powermock.version>2.0.5</powermock.version>
     <worldedit.version>7.0.0</worldedit.version>
     <worldguard.version>7.0.0</worldguard.version>

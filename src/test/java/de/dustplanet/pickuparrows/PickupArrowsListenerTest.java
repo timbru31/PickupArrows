@@ -23,12 +23,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
 /**
  * PickupArrows for CraftBukkit/Spigot Handles the test cases Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
@@ -37,6 +39,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 
 @RunWith(PowerMockRunner.class)
+@PowerMockRunnerDelegate(JUnitPlatform.class)
 @PrepareForTest({ ProjectileHitEvent.class, PickupArrowsListener.class })
 public class PickupArrowsListenerTest {
     private ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
@@ -45,7 +48,7 @@ public class PickupArrowsListenerTest {
     private Projectile arrow = mock(Arrow.class);
     private String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
 
-    @Before
+    @BeforeEach
     public void initialize() {
         plugin = mock(PickupArrows.class);
         listener = PowerMockito.spy(new PickupArrowsListener(plugin));

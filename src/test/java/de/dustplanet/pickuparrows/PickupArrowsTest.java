@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
 /**
  * PickupArrows for CraftBukkit/Spigot Handles the test cases Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
@@ -25,11 +27,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 
 @RunWith(PowerMockRunner.class)
+@PowerMockRunnerDelegate(JUnitPlatform.class)
 @PrepareForTest({ JavaPlugin.class })
 public class PickupArrowsTest {
     private PickupArrows plugin;
 
-    @Before
+    @BeforeEach
     public void initialize() {
         suppress(defaultConstructorIn(PickupArrows.class));
         plugin = new PickupArrows();

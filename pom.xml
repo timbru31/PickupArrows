@@ -1,10 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>de.dustplanet</groupId>
     <artifactId>bukkit-plugin</artifactId>
-    <version>5.0.0</version>
+    <version>5.6.0</version>
     <relativePath />
   </parent>
 
@@ -15,17 +17,12 @@
   <url>https://dev.bukkit.org/projects/pickuparrows</url>
 
   <properties>
-    <bstats.version>1.7</bstats.version>
     <plugin.name>PickupArrows</plugin.name>
     <plugin.main>de.dustplanet.pickuparrows.PickupArrows</plugin.main>
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
-    <bukkit.version>1.15.2-R0.1-SNAPSHOT</bukkit.version>
-    <junit.version>4.12</junit.version>
-    <mockito.core.version>3.3.3</mockito.core.version>
     <powermock.version>2.0.7</powermock.version>
     <worldedit.version>7.0.0</worldedit.version>
     <worldguard.version>7.0.0</worldguard.version>
-    <lombok.version>1.18.8</lombok.version>
   </properties>
 
   <repositories>
@@ -36,10 +33,6 @@
     <repository>
       <id>Dustplanet-releases</id>
       <url>https://repo.dustplanet.de/artifactory/ext-release-local</url>
-    </repository>
-    <repository>
-      <id>bstats-repo-new</id>
-      <url>https://repo.codemc.org/repository/maven-public</url>
     </repository>
   </repositories>
 
@@ -61,18 +54,6 @@
       <version>${worldedit.version}</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <version>${mockito.core.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
       <version>${powermock.version}</version>
@@ -84,7 +65,30 @@
       <version>${powermock.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${junit.platform.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${surefire.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit4</artifactId>
+            <version>${surefire.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
 
   <!-- Maven is broken -->
   <scm>

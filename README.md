@@ -1,7 +1,7 @@
 # PickupArrows
 [![Build Status](https://ci.dustplanet.de/job/PickupArrows/badge/icon)](https://ci.dustplanet.de/job/PickupArrows/)
 [![Build Status](https://travis-ci.org/timbru31/PickupArrows.svg?branch=master)](https://travis-ci.org/timbru31/PickupArrows)
-[![Build status](https://ci.appveyor.com/api/projects/status/cbw34npfxv7v4kup?svg=true)](https://ci.appveyor.com/project/timbru31/pickuparrows)
+[![Build the plugin](https://github.com/timbru31/PickupArrows/workflows/Build%20the%20plugin/badge.svg)](https://github.com/timbru31/PickupArrows/actions?query=workflow%3A%22Build+the+plugin%22)
 
 [![BukkitDev](https://img.shields.io/badge/BukkitDev-v6.2.1-orange.svg)](https://dev.bukkit.org/projects/pickuparrows)
 [![SpigotMC](https://img.shields.io/badge/SpigotMC-v6.2.1-orange.svg)](https://www.spigotmc.org/resources/pickuparrows.8073/)

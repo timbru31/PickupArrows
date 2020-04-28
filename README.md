@@ -117,7 +117,7 @@ Please follow the Sun Coding Guidelines, thanks!
 
 ## Usage statistics
 
-_stats images are returning soon!_
+[![Usage statistics](https://bstats.org/signatures/bukkit/PickupArrows.svg)](https://bstats.org/plugin/bukkit/PickupArrows/284)
 
 ## Data usage collection of bStats
 

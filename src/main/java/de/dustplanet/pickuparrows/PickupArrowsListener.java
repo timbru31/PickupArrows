@@ -3,6 +3,7 @@ package de.dustplanet.pickuparrows;
 import java.util.Locale;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.AbstractArrow.PickupStatus;
 import org.bukkit.entity.Arrow;
@@ -15,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
@@ -60,18 +62,23 @@ public class PickupArrowsListener implements Listener {
         boolean isSpectral = isSpectral(arrow);
         boolean isTipped = isTipped(arrow);
         boolean isTrident = isTrident(arrow);
+        boolean isCrossbow = false;
 
         String shooterName = "unknown";
         if (shooter instanceof Player) {
             shooterName = "player";
-            boolean isCrossbow = ((Player) shooter).getInventory().getItemInMainHand().getType() == Material.CROSSBOW;
+            ItemStack crossbow = ((Player) shooter).getInventory().getItemInMainHand();
+            isCrossbow = crossbow.getType() == Material.CROSSBOW;
             if (isCrossbow) {
                 shooterName += ".crossbow";
+                if (crossbow.containsEnchantment(Enchantment.MULTISHOT)) {
+                    shooterName += ".multishot";
+                }
             }
         } else if (shooter instanceof BlockProjectileSource) {
             shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase(Locale.ENGLISH);
         } else if (shooter instanceof LivingEntity) {
-            shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase();
+            shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase(Locale.ENGLISH);
         }
 
         // Return if arrow is creative
@@ -122,6 +129,38 @@ public class PickupArrowsListener implements Listener {
         }
     }
 
+    @SuppressWarnings("deprecation")
+    @EventHandler
+    public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
+        Player player = event.getPlayer();
+
+        if (plugin.getDisabledPlayers().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+            return;
+        }
+
+        if (!plugin.getConfig().getBoolean("usePermissions", false)) {
+            return;
+        }
+        AbstractArrow arrow = event.getArrow();
+        boolean onFire = onFire(arrow);
+        boolean isSpectral = isSpectral(arrow);
+        boolean isTipped = isTipped(arrow);
+        boolean isTrident = isTrident(arrow);
+
+        if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
+            event.setCancelled(true);
+        } else if (!onFire && !isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.normal")) {
+            event.setCancelled(true);
+        } else if (isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.spectral")) {
+            event.setCancelled(true);
+        } else if (!isSpectral && isTipped && !player.hasPermission("pickuparrows.allow.tipped")) {
+            event.setCancelled(true);
+        } else if (isTrident && !player.hasPermission("pickuparrows.allow.trident")) {
+            event.setCancelled(true);
+        }
+    }
+
     /**
      * Sets whether the arrow is from a player or not.
      *
@@ -161,37 +200,5 @@ public class PickupArrowsListener implements Listener {
 
     private boolean isTrident(AbstractArrow arrow) {
         return arrow instanceof Trident;
-    }
-
-    @SuppressWarnings("deprecation")
-    @EventHandler
-    public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
-        Player player = event.getPlayer();
-
-        if (plugin.getDisabledPlayers().contains(player.getUniqueId())) {
-            event.setCancelled(true);
-            return;
-        }
-
-        if (!plugin.getConfig().getBoolean("usePermissions", false)) {
-            return;
-        }
-        AbstractArrow arrow = event.getArrow();
-        boolean onFire = onFire(arrow);
-        boolean isSpectral = isSpectral(arrow);
-        boolean isTipped = isTipped(arrow);
-        boolean isTrident = isTrident(arrow);
-
-        if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
-            event.setCancelled(true);
-        } else if (!onFire && !isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.normal")) {
-            event.setCancelled(true);
-        } else if (isSpectral && !isTipped && !player.hasPermission("pickuparrows.allow.spectral")) {
-            event.setCancelled(true);
-        } else if (!isSpectral && isTipped && !player.hasPermission("pickuparrows.allow.tipped")) {
-            event.setCancelled(true);
-        } else if (isTrident && !player.hasPermission("pickuparrows.allow.trident")) {
-            event.setCancelled(true);
-        }
     }
 }

@@ -53,7 +53,7 @@ public class PickupArrowsListenerTest {
         plugin = mock(PickupArrows.class);
         listener = PowerMockito.spy(new PickupArrowsListener(plugin));
         // We never use WorldGuard
-        when(plugin.isUsingWorldGuard()).thenReturn(false);
+        when(plugin.isUsingWorldGuard()).thenReturn(Boolean.FALSE);
 
         // Default mocks
         when(mockEvent.getEntity()).thenReturn(arrow);
@@ -64,7 +64,7 @@ public class PickupArrowsListenerTest {
             PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.ALLOWED);
             PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.DISALLOWED);
             PowerMockito.doReturn(PickupStatus.DISALLOWED).when(listener, "getPickup", arrow);
-            PowerMockito.doReturn(false).when(listener, "isTipped", arrow);
+            PowerMockito.doReturn(Boolean.FALSE).when(listener, "isTipped", arrow);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,9 +125,9 @@ public class PickupArrowsListenerTest {
             for (boolean value : v) {
                 usePermissions(value);
                 // Defaults
-                when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(true);
-                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(true);
-                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(true);
+                when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(Boolean.TRUE);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(Boolean.TRUE);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(Boolean.TRUE);
 
                 /*
                  * Case 1 is no fire and allowed
@@ -144,14 +144,14 @@ public class PickupArrowsListenerTest {
                 /*
                  * Case 3 is fire and disallowed
                  */
-                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(false);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".fire")).thenReturn(Boolean.FALSE);
                 listener.onProjectileHitEvent(mockEvent);
 
                 /*
                  * Case 4 is no fire and disallowed
                  */
                 onFire(0);
-                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(false);
+                when(plugin.getConfig().getBoolean("pickupFrom." + caze + ".normal")).thenReturn(Boolean.FALSE);
                 listener.onProjectileHitEvent(mockEvent);
             }
         }

@@ -46,6 +46,11 @@ pickupFrom:
       normal: true
       spectral: true
       tipped: true
+      multishot:
+        fire: false
+        normal: false
+        spectral: false
+        tipped: false
   dispenser:
     fire: true
     normal: true

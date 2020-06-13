@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>PickupArrows</artifactId>
-  <version>6.2.3-SNAPSHOT</version>
+  <version>6.2.3</version>
   <name>PickupArrows</name>
   <description>Allows players to pickup arrows from mobs</description>
   <url>https://dev.bukkit.org/projects/pickuparrows</url>
@@ -90,7 +90,7 @@
 
   <!-- Maven is broken -->
   <scm>
-    <tag>master</tag>
+    <tag>PickupArrows-6.2.3</tag>
     <url>https://github.com/timbru31/PickupArrows</url>
     <connection>scm:git:git://github.com/timbru31/PickupArrows.git</connection>
     <developerConnection>scm:git:git@github.com:timbru31/PickupArrows.git</developerConnection>

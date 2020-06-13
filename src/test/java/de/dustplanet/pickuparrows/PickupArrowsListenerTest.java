@@ -1,7 +1,7 @@
 package de.dustplanet.pickuparrows;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
@@ -32,23 +32,34 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
- * PickupArrows for CraftBukkit/Spigot Handles the test cases Refer to the dev.bukkit.org page: https://dev.bukkit.org/projects/pickuparrows
+ * Handles the test cases for the listener. Thanks to Pandarr for the awesome tutorial.
  *
- * @author xGhOsTkiLLeRx thanks to Pandarr for the awesome tutorial
+ * @author timbru31
  */
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(JUnitPlatform.class)
 @PrepareForTest({ ProjectileHitEvent.class, PickupArrowsListener.class })
+@SuppressWarnings({ "PMD.AtLeastOneConstructor", "checkstyle:MissingCtor", "PMD.TooManyStaticImports", "PMD.ExcessiveImports",
+        "checkstyle:MultipleStringLiterals" })
 public class PickupArrowsListenerTest {
-    private ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
+    private final ProjectileHitEvent mockEvent = PowerMockito.mock(ProjectileHitEvent.class);
     private PickupArrowsListener listener;
     private PickupArrows plugin;
-    private Projectile arrow = mock(Arrow.class);
-    private String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
+    private final Projectile arrow = mock(Arrow.class);
+    private final String[] cazes = { "player", "dispenser", "skeleton", "unknown" };
 
+    /**
+     * Initializes the test.
+     */
     @BeforeEach
+    @SuppressWarnings({ "checkstyle:IllegalCatch", "PMD.AvoidDuplicateLiterals", "PMD.AvoidCatchingGenericException",
+            "PMD.AvoidPrintStackTrace" })
+    @SuppressFBWarnings({ "PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS", "IMC_IMMATURE_CLASS_PRINTSTACKTRACE",
+            "INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE" })
     public void initialize() {
         plugin = mock(PickupArrows.class);
         listener = PowerMockito.spy(new PickupArrowsListener(plugin));
@@ -65,53 +76,63 @@ public class PickupArrowsListenerTest {
             PowerMockito.doNothing().when(listener, "setPickup", arrow, PickupStatus.DISALLOWED);
             PowerMockito.doReturn(PickupStatus.DISALLOWED).when(listener, "getPickup", arrow);
             PowerMockito.doReturn(Boolean.FALSE).when(listener, "isTipped", arrow);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
      * Test method for
-     * {@link de.dustplanet.pickuparrows.PickupArrowsListener#onProjectileHitEvent(org.bukkit.event.entity.ProjectileHitEvent)}
+     * {@link de.dustplanet.pickuparrows.PickupArrowsListener#onProjectileHitEvent(org.bukkit.event.entity.ProjectileHitEvent)}.
      */
     @Test
+    @SuppressWarnings({ "PMD.AvoidCatchingNPE", "PMD.AvoidCatchingGenericException", "PMD.JUnitTestContainsTooManyAsserts" })
     public void testWrongEntity() {
         // a null entity should be filtered out
         when(mockEvent.getEntity()).thenReturn(null);
         try {
             listener.onProjectileHitEvent(mockEvent);
-        } catch (NullPointerException e) {
-            assertNull(e);
+        } catch (final NullPointerException e) {
+            assertNull(e, "A wrong entity should throw a NPE");
         }
 
         // A Fish is a Projectile, too, but shouldn't pass the entity check
-        Projectile fish = mock(FishHook.class);
+        final Projectile fish = mock(FishHook.class);
         when(mockEvent.getEntity()).thenReturn(fish);
         try {
             listener.onProjectileHitEvent(mockEvent);
-        } catch (ClassCastException e) {
-            assertNull(e);
+        } catch (final ClassCastException e) {
+            assertNull(e, "An invalid entity should throw a ClassCastException");
         }
     }
 
+    /**
+     * Tests the different pickup cases with various config settings.
+     *
+     * @throws Exception in case of an error
+     */
     @Test
+    @SuppressWarnings({ "checkstyle:MagicNumber", "checkstyle:IllegalCatch", "checkstyle:ExecutableStatementCount",
+            "PMD.AvoidCatchingGenericException", "PMD.AvoidPrintStackTrace", "PMD.AvoidInstantiatingObjectsInLoops",
+            "PMD.AvoidDuplicateLiterals" })
+    @SuppressFBWarnings({ "IMC_IMMATURE_CLASS_PRINTSTACKTRACE", "INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE" })
     public void testCases() throws Exception {
-        for (String caze : cazes) {
-            ProjectileSource shooter;
+        for (final String caze : cazes) {
+            final ProjectileSource shooter;
             if ("player".equalsIgnoreCase(caze)) {
                 shooter = mock(Player.class);
-                PlayerInventory inv = mock(PlayerInventory.class);
+                final PlayerInventory inv = mock(PlayerInventory.class);
                 PowerMockito.doReturn(new ItemStack(Material.BOW)).when(inv, "getItemInMainHand");
                 PowerMockito.doReturn(inv).when(shooter, "getInventory");
             } else if ("skeleton".equalsIgnoreCase(caze)) {
                 shooter = mock(Skeleton.class);
-                EntityEquipment eqipment = mock(EntityEquipment.class);
+                final EntityEquipment eqipment = mock(EntityEquipment.class);
                 PowerMockito.doReturn(new ItemStack(Material.BOW)).when(eqipment, "getItemInMainHand");
                 PowerMockito.doReturn(eqipment).when(shooter, "getEquipment");
                 when(((LivingEntity) shooter).getType()).thenReturn(EntityType.SKELETON);
             } else if ("dispenser".equalsIgnoreCase(caze)) {
                 shooter = mock(BlockProjectileSource.class);
-                Block stubbedBlock = mock(Block.class);
+                final Block stubbedBlock = mock(Block.class);
                 when(((BlockProjectileSource) shooter).getBlock()).thenReturn(stubbedBlock);
                 when(stubbedBlock.getType()).thenReturn(Material.DISPENSER);
             } else {
@@ -121,8 +142,8 @@ public class PickupArrowsListenerTest {
             when(mockEvent.getEntity().getShooter()).thenReturn(shooter);
 
             // Iterate through permission values
-            boolean v[] = { false, true };
-            for (boolean value : v) {
+            final boolean[] booleanValues = { false, true };
+            for (final boolean value : booleanValues) {
                 usePermissions(value);
                 // Defaults
                 when(plugin.getConfig().contains("pickupFrom." + caze)).thenReturn(Boolean.TRUE);
@@ -160,17 +181,17 @@ public class PickupArrowsListenerTest {
         try {
             PowerMockito.verifyPrivate(listener, times(32)).invoke("setPickup", arrow, PickupStatus.DISALLOWED);
             PowerMockito.verifyPrivate(listener, times(16)).invoke("setPickup", arrow, PickupStatus.ALLOWED);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
-            fail();
+            fail("Test need to fail in case of an excetpion");
         }
     }
 
-    private void onFire(int ticks) {
+    private void onFire(final int ticks) {
         when(arrow.getFireTicks()).thenReturn(ticks);
     }
 
-    private void usePermissions(boolean perm) {
+    private void usePermissions(final boolean perm) {
         when(plugin.getConfig().getBoolean("usePermissions")).thenReturn(perm);
     }
 }

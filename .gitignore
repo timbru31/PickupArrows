@@ -4,3 +4,4 @@
 .settings/*
 dependency-reduced-pom.xml
 bin/
+.eclipse-pmd

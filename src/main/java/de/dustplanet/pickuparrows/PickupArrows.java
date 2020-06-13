@@ -14,12 +14,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles general stuff! Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/pickuparrows
+ * Handles plugin enabling and disabling and configuration things.
  *
- * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
+ * @author timbru31
+ * @author mushroomhostage
  */
 
+@SuppressWarnings({ "checkstyle:MultipleStringLiterals", "PMD.AtLeastOneConstructor", "checkstyle:MissingCtor" })
+@SuppressFBWarnings({ "OPM_OVERLY_PERMISSIVE_METHOD", "CD_CIRCULAR_DEPENDENCY", "FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY" })
 public class PickupArrows extends JavaPlugin {
     private static final int BSTATS_PLUGIN_ID = 284;
     @Getter
@@ -36,7 +38,7 @@ public class PickupArrows extends JavaPlugin {
     private List<String> regions = new ArrayList<>();
 
     @Getter
-    private List<UUID> disabledPlayers = new ArrayList<>();
+    private final List<UUID> disabledPlayers = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -44,16 +46,16 @@ public class PickupArrows extends JavaPlugin {
         getDisabledPlayers().clear();
     }
 
-    @SuppressWarnings("unused")
-    @SuppressFBWarnings(value = "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     @Override
+    @SuppressWarnings({ "unused", "PMD.UnnecessaryAnnotationValueElement" })
+    @SuppressFBWarnings({ "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE", "SEC_SIDE_EFFECT_CONSTRUCTOR" })
     public void onEnable() {
         setConfigDefaults();
         setUsingWorldGuard(getConfig().getBoolean("useWorldGuard"));
         if (isUsingWorldGuard()) {
             setBlacklist(getConfig().getBoolean("useListAsBlacklist"));
             setRegions(getConfig().getStringList("regions"));
-            Plugin worldGuardPlugin = getServer().getPluginManager().getPlugin("WorldGuard");
+            final Plugin worldGuardPlugin = getServer().getPluginManager().getPlugin("WorldGuard");
             if (worldGuardPlugin == null) {
                 setUsingWorldGuard(false);
             }
@@ -66,12 +68,14 @@ public class PickupArrows extends JavaPlugin {
         new Metrics(this, BSTATS_PLUGIN_ID);
     }
 
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
+    @SuppressFBWarnings(value = "SACM_STATIC_ARRAY_CREATED_IN_METHOD", justification = "Only called once")
     private void setConfigDefaults() {
-        FileConfiguration config = getConfig();
+        final FileConfiguration config = getConfig();
         config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
         config.addDefault("usePermissions", Boolean.TRUE);
-        String[] temp = { "skeleton", "player", "dispenser", "drowned", "pillager" };
-        for (String s : temp) {
+        final String[] temp = { "skeleton", "player", "dispenser", "drowned", "pillager" };
+        for (final String s : temp) {
             config.addDefault("pickupFrom." + s + ".fire", Boolean.TRUE);
             config.addDefault("pickupFrom." + s + ".normal", Boolean.TRUE);
             config.addDefault("pickupFrom." + s + ".spectral", Boolean.TRUE);

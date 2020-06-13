@@ -23,23 +23,27 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
-// WorldGuard
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
- * PickupArrows for CraftBukkit/Spigot. Handles activities (ProjectileHit)! Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/pickuparrows
+ * Handles projectile hit and pickup events.
  *
- * @author xGhOsTkiLLeRx thanks to mushroomhostage for the original PickupArrows plugin!
+ * @author timbru31
+ * @author mushroomhostage
  */
 
+@SuppressWarnings({ "PMD.GodClass", "checkstyle:ClassFanOutComplexity", "checkstyle:MultipleStringLiterals" })
+@SuppressFBWarnings({ "IMC_IMMATURE_CLASS_NO_TOSTRING", "CD_CIRCULAR_DEPENDENCY", "FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY" })
 public class PickupArrowsListener implements Listener {
-    private PickupArrows plugin;
+    private final PickupArrows plugin;
 
-    public PickupArrowsListener(PickupArrows instance) {
+    @SuppressWarnings("checkstyle:MissingJavadocMethod")
+    public PickupArrowsListener(final PickupArrows instance) {
         plugin = instance;
     }
 
@@ -49,37 +53,15 @@ public class PickupArrowsListener implements Listener {
      * @param event a ProjectileHitEvent
      */
     @EventHandler
-    public void onProjectileHitEvent(ProjectileHitEvent event) {
-        Projectile projectile = event.getEntity();
+    @SuppressWarnings({ "checkstyle:ReturnCount", "PMD.AvoidDuplicateLiterals", "PMD.DataflowAnomalyAnalysis", "PMD.CyclomaticComplexity",
+            "checkstyle:CyclomaticComplexity" })
+    public void onProjectileHitEvent(final ProjectileHitEvent event) {
+        final Projectile projectile = event.getEntity();
         if (!(projectile instanceof AbstractArrow)) {
             return;
         }
-        // Get data
-        AbstractArrow arrow = (AbstractArrow) projectile;
-        ProjectileSource shooter = projectile.getShooter();
 
-        boolean onFire = onFire(arrow);
-        boolean isSpectral = isSpectral(arrow);
-        boolean isTipped = isTipped(arrow);
-        boolean isTrident = isTrident(arrow);
-        boolean isCrossbow = false;
-
-        String shooterName = "unknown";
-        if (shooter instanceof Player) {
-            shooterName = "player";
-            ItemStack crossbow = ((Player) shooter).getInventory().getItemInMainHand();
-            isCrossbow = crossbow.getType() == Material.CROSSBOW;
-            if (isCrossbow) {
-                shooterName += ".crossbow";
-                if (crossbow.containsEnchantment(Enchantment.MULTISHOT)) {
-                    shooterName += ".multishot";
-                }
-            }
-        } else if (shooter instanceof BlockProjectileSource) {
-            shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase(Locale.ENGLISH);
-        } else if (shooter instanceof LivingEntity) {
-            shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase(Locale.ENGLISH);
-        }
+        final AbstractArrow arrow = (AbstractArrow) projectile;
 
         // Return if arrow is creative
         if (plugin.getConfig().getBoolean("ignoreCreativeArrows", false) && getPickup(arrow) == PickupStatus.CREATIVE_ONLY) {
@@ -88,16 +70,16 @@ public class PickupArrowsListener implements Listener {
 
         // Make WorldGuard check
         if (plugin.isUsingWorldGuard()) {
-            RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
-            RegionQuery query = regionContainer.createQuery();
-            ApplicableRegionSet regionList = query.getApplicableRegions(BukkitAdapter.adapt(arrow.getLocation()));
+            final RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            final RegionQuery query = regionContainer.createQuery();
+            final ApplicableRegionSet regionList = query.getApplicableRegions(BukkitAdapter.adapt(arrow.getLocation()));
             // If we use a whitelist and no regions are here, cancel
             if (regionList.size() == 0 && !plugin.isBlacklist()) {
                 return;
             }
             // Iterate through the regions
-            for (ProtectedRegion region : regionList) {
-                String regionName = region.getId();
+            for (final ProtectedRegion region : regionList) {
+                final String regionName = region.getId();
                 // Either it's on the blacklist or not on the whitelist --> cancel
                 if (plugin.isBlacklist() && plugin.getRegions().contains(regionName) || !plugin.getRegions().contains(regionName)) {
                     return;
@@ -105,6 +87,12 @@ public class PickupArrowsListener implements Listener {
             }
         }
 
+        final ProjectileSource shooter = projectile.getShooter();
+        String shooterName = getShooterName(shooter);
+        final boolean onFire = onFire(arrow);
+        final boolean isSpectral = isSpectral(arrow);
+        final boolean isTipped = isTipped(arrow);
+        final boolean isTrident = isTrident(arrow);
         // First deny it & then check if we can allow it again
         setPickup(arrow, PickupStatus.DISALLOWED);
 
@@ -112,6 +100,12 @@ public class PickupArrowsListener implements Listener {
         if (!plugin.getConfig().contains("pickupFrom." + shooterName)) {
             shooterName = "unknown";
         }
+        setPickupStatus(arrow, shooterName, onFire, isSpectral, isTipped, isTrident);
+    }
+
+    @SuppressWarnings({ "checkstyle:CyclomaticComplexity", "PMD.CyclomaticComplexity" })
+    private void setPickupStatus(final AbstractArrow arrow, final String shooterName, final boolean onFire, final boolean isSpectral,
+            final boolean isTipped, final boolean isTrident) {
         if (isTrident) {
             if (plugin.getConfig().getBoolean("pickupFrom." + shooterName + ".trident")) {
                 setPickup(arrow, PickupStatus.ALLOWED);
@@ -129,10 +123,38 @@ public class PickupArrowsListener implements Listener {
         }
     }
 
+    @SuppressWarnings({ "static-method", "PMD.AvoidDuplicateLiterals", "PMD.DataflowAnomalyAnalysis",
+            "PMD.UseStringBufferForStringAppends" })
+    @SuppressFBWarnings("ITC_INHERITANCE_TYPE_CHECKING")
+    private String getShooterName(final ProjectileSource shooter) {
+        String shooterName = "unknown";
+        if (shooter instanceof Player) {
+            shooterName = "player";
+            final ItemStack crossbow = ((Player) shooter).getInventory().getItemInMainHand();
+            final boolean isCrossbow = crossbow.getType() == Material.CROSSBOW;
+            if (isCrossbow) {
+                shooterName += ".crossbow";
+            }
+            if (isCrossbow && crossbow.containsEnchantment(Enchantment.MULTISHOT)) {
+                shooterName += ".multishot";
+            }
+        } else if (shooter instanceof BlockProjectileSource) {
+            shooterName = ((BlockProjectileSource) shooter).getBlock().getType().name().toLowerCase(Locale.ENGLISH);
+        } else if (shooter instanceof LivingEntity) {
+            shooterName = ((LivingEntity) shooter).getType().toString().toLowerCase(Locale.ENGLISH);
+        }
+        return shooterName;
+    }
+
+    /**
+     * Handles the picking up of arrows.
+     *
+     * @param event the PickupArrowsEvent
+     */
     @SuppressWarnings("deprecation")
     @EventHandler
-    public void onPlayerPickupArrow(PlayerPickupArrowEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerPickupArrow(final PlayerPickupArrowEvent event) {
+        final Player player = event.getPlayer();
 
         if (plugin.getDisabledPlayers().contains(player.getUniqueId())) {
             event.setCancelled(true);
@@ -142,11 +164,18 @@ public class PickupArrowsListener implements Listener {
         if (!plugin.getConfig().getBoolean("usePermissions", false)) {
             return;
         }
-        AbstractArrow arrow = event.getArrow();
-        boolean onFire = onFire(arrow);
-        boolean isSpectral = isSpectral(arrow);
-        boolean isTipped = isTipped(arrow);
-        boolean isTrident = isTrident(arrow);
+
+        checkArrowStates(event, player);
+    }
+
+    @SuppressWarnings({ "deprecation", "PMD.DataflowAnomalyAnalysis", "PMD.CyclomaticComplexity", "PMD.ConfusingTernary",
+            "checkstyle:CyclomaticComplexity" })
+    private void checkArrowStates(final PlayerPickupArrowEvent event, final Player player) {
+        final AbstractArrow arrow = event.getArrow();
+        final boolean onFire = onFire(arrow);
+        final boolean isSpectral = isSpectral(arrow);
+        final boolean isTipped = isTipped(arrow);
+        final boolean isTrident = isTrident(arrow);
 
         if (onFire && !player.hasPermission("pickuparrows.allow.fire")) {
             event.setCancelled(true);
@@ -167,7 +196,8 @@ public class PickupArrowsListener implements Listener {
      * @param arrow to change
      * @param status PickupStatus (allowed, disallowed, creative only)
      */
-    private void setPickup(AbstractArrow arrow, PickupStatus status) {
+    @SuppressWarnings({ "static-method", "PMD.AvoidDuplicateLiterals" })
+    private void setPickup(final AbstractArrow arrow, final PickupStatus status) {
         arrow.setPickupStatus(status);
     }
 
@@ -177,11 +207,13 @@ public class PickupArrowsListener implements Listener {
      * @param arrow the arrow
      * @return PickupStatus (allowed, disallowed, creative only)
      */
-    private PickupStatus getPickup(AbstractArrow arrow) {
+    @SuppressWarnings("static-method")
+    private PickupStatus getPickup(final AbstractArrow arrow) {
         return arrow.getPickupStatus();
     }
 
-    private boolean onFire(AbstractArrow arrow) {
+    @SuppressWarnings({ "static-method", "PMD.DataflowAnomalyAnalysis" })
+    private boolean onFire(final AbstractArrow arrow) {
         boolean onFire = false;
         if (arrow.getFireTicks() > 0) {
             onFire = true;
@@ -189,16 +221,19 @@ public class PickupArrowsListener implements Listener {
         return onFire;
     }
 
-    private boolean isTipped(AbstractArrow arrow) {
+    @SuppressWarnings("static-method")
+    private boolean isTipped(final AbstractArrow arrow) {
         return arrow instanceof Arrow && ((Arrow) arrow).getBasePotionData().getType() != PotionType.UNCRAFTABLE;
 
     }
 
-    private boolean isSpectral(AbstractArrow arrow) {
+    @SuppressWarnings("static-method")
+    private boolean isSpectral(final AbstractArrow arrow) {
         return arrow instanceof SpectralArrow;
     }
 
-    private boolean isTrident(AbstractArrow arrow) {
+    @SuppressWarnings("static-method")
+    private boolean isTrident(final AbstractArrow arrow) {
         return arrow instanceof Trident;
     }
 }

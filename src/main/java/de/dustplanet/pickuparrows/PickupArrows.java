@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -64,8 +65,14 @@ public class PickupArrows extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PickupArrowsListener(this), this);
 
         getServer().getPluginCommand("pickuparrows").setExecutor(new PickupArrowsCommandExecutor(this));
-
+        
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+        	new de.dustplanet.pickuparrows.PickupArrowsPAPI(this).register();
+        	Bukkit.getServer().getLogger().info("Hooked into PlaceholderAPI!");
+        }
+        
         new Metrics(this, BSTATS_PLUGIN_ID);
+
     }
 
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")

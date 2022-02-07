@@ -18,6 +18,7 @@
     <plugin.name>PickupArrows</plugin.name>
     <plugin.main>de.dustplanet.pickuparrows.PickupArrows</plugin.main>
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
+    <placeholderapi.version>2.9.2</placeholderapi.version>
     <powermock.version>2.0.9</powermock.version>
     <worldedit.version>7.2.8</worldedit.version>
     <worldguard.version>7.0.6</worldguard.version>
@@ -31,6 +32,14 @@
     <repository>
       <id>Dustplanet-releases</id>
       <url>https://repo.dustplanet.de/artifactory/ext-release-local</url>
+    </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
+    <repository>
+      <id>drkmatr1984-repo</id>
+      <url>https://minevolt.net/repo/</url>
     </repository>
   </repositories>
 
@@ -68,6 +77,11 @@
       <artifactId>junit-platform-runner</artifactId>
       <version>${junit.platform.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>${placeholderapi.version}</version>
     </dependency>
   </dependencies>
 

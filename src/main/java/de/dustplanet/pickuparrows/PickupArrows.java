@@ -72,7 +72,7 @@ public class PickupArrows extends JavaPlugin {
     @SuppressFBWarnings(value = "SACM_STATIC_ARRAY_CREATED_IN_METHOD", justification = "Only called once")
     private void setConfigDefaults() {
         final FileConfiguration config = getConfig();
-        config.options().header("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows");
+        config.options().setHeader(List.of("For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/pickuparrows"));
         config.addDefault("usePermissions", Boolean.TRUE);
         final String[] temp = { "skeleton", "player", "dispenser", "drowned", "pillager" };
         for (final String s : temp) {

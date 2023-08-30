@@ -19,8 +19,8 @@
     <plugin.main>de.dustplanet.pickuparrows.PickupArrows</plugin.main>
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
     <powermock.version>2.0.9</powermock.version>
-    <worldedit.version>7.2.14</worldedit.version>
-    <worldguard.version>7.0.6</worldguard.version>
+    <worldedit.version>7.2.15</worldedit.version>
+    <worldguard.version>7.0.9</worldguard.version>
   </properties>
 
   <repositories>

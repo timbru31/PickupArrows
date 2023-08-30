@@ -2,10 +2,10 @@ name: PickupArrows
 main: de.dustplanet.pickuparrows.PickupArrows
 description: Allows you to pickup arrows
 version: ${project.version}${build.number}
-author: xGhOsTkiLLeRx
+author: timbru31
 authors: [mushroomhostage]
 website: https://dev.bukkit.org/projects/pickuparrows
-api-version: 1.13
+api-version: 1.18
 commands:
   pickuparrows:
     description: Toggles whether arrows should be picked up

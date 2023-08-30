@@ -5,6 +5,7 @@ version: ${project.version}${build.number}
 author: xGhOsTkiLLeRx
 authors: [mushroomhostage]
 website: https://dev.bukkit.org/projects/pickuparrows
+softdepend: [PlaceholderAPI]
 api-version: 1.13
 commands:
   pickuparrows:

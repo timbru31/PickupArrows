@@ -29,9 +29,9 @@ public class PickupArrows extends JavaPlugin {
     private boolean usingWorldGuard;
     @Getter
     @Setter
-    private boolean blacklist;
+    private boolean denylist;
     /**
-     * List of WorldGuard regions used for black/whitelist.
+     * List of WorldGuard regions used for allow/deny list
      */
     @Getter
     @Setter
@@ -53,7 +53,7 @@ public class PickupArrows extends JavaPlugin {
         setConfigDefaults();
         setUsingWorldGuard(getConfig().getBoolean("useWorldGuard"));
         if (isUsingWorldGuard()) {
-            setBlacklist(getConfig().getBoolean("useListAsBlacklist"));
+            setDenylist(getConfig().getBoolean("useListAsDenylist"));
             setRegions(getConfig().getStringList("regions"));
             final Plugin worldGuardPlugin = getServer().getPluginManager().getPlugin("WorldGuard");
             if (worldGuardPlugin == null) {
@@ -97,8 +97,8 @@ public class PickupArrows extends JavaPlugin {
         config.addDefault("pickupFrom.unknown.trident", Boolean.FALSE);
         config.addDefault("ignoreCreativeArrows", Boolean.FALSE);
         config.addDefault("useWorldGuard", Boolean.FALSE);
-        config.addDefault("useListAsBlacklist", Boolean.FALSE);
-        config.addDefault("regions", new ArrayList<String>());
+        config.addDefault("useListAsDenylist", Boolean.FALSE);
+        config.addDefault("regions", new ArrayList<>());
         config.options().copyDefaults(true);
         saveConfig();
     }

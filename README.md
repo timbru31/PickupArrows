@@ -16,7 +16,7 @@ Special features are
 
 - Flexible configuration support, add or remove own mobs/sources of shooters
 - Permission to control the pickup
-- WorldGuard support. Black or whitelist regions, where the plugin should be active!
+- WorldGuard support. Allow or deny regions where the plugin should be active!
 - Support for normal, fire, spectral or tipped arrows and tridents
 - Command to toggle the status of picking up arrows
 - Crossbow, Drowned and Pillager support
@@ -81,7 +81,7 @@ pickupFrom:
     trident: false
 ignoreCreativeArrows: false
 useWorldGuard: false
-useListAsBlacklist: false
+useListAsDenylist: false
 regions: []
 ```
 

@@ -49,5 +49,5 @@ pickupFrom:
     trident: false
 ignoreCreativeArrows: false
 useWorldGuard: false
-useListAsBlacklist: false
+useListAsDenylist: false
 regions: []

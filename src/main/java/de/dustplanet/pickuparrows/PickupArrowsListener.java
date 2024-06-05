@@ -17,7 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerPickupArrowEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionType;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.bukkit.projectiles.ProjectileSource;
 
@@ -73,15 +72,15 @@ public class PickupArrowsListener implements Listener {
             final RegionContainer regionContainer = WorldGuard.getInstance().getPlatform().getRegionContainer();
             final RegionQuery query = regionContainer.createQuery();
             final ApplicableRegionSet regionList = query.getApplicableRegions(BukkitAdapter.adapt(arrow.getLocation()));
-            // If we use a whitelist and no regions are here, cancel
-            if (regionList.size() == 0 && !plugin.isBlacklist()) {
+            // If we use an allowlist and no regions are here, cancel
+            if (regionList.size() == 0 && !plugin.isDenylist()) {
                 return;
             }
             // Iterate through the regions
             for (final ProtectedRegion region : regionList) {
                 final String regionName = region.getId();
-                // Either it's on the blacklist or not on the whitelist --> cancel
-                if (plugin.isBlacklist() && plugin.getRegions().contains(regionName) || !plugin.getRegions().contains(regionName)) {
+                // Either it's on the denylist or not on the allowlist --> cancel
+                if (plugin.isDenylist() && plugin.getRegions().contains(regionName) || !plugin.getRegions().contains(regionName)) {
                     return;
                 }
             }
@@ -223,7 +222,7 @@ public class PickupArrowsListener implements Listener {
 
     @SuppressWarnings("static-method")
     private boolean isTipped(final AbstractArrow arrow) {
-        return arrow instanceof Arrow && ((Arrow) arrow).getBasePotionData().getType() != PotionType.UNCRAFTABLE;
+        return arrow instanceof Arrow && ((Arrow) arrow).getBasePotionType() != null;
 
     }
 

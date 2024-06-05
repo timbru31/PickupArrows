@@ -4,23 +4,25 @@
   <parent>
     <groupId>de.dustplanet</groupId>
     <artifactId>bukkit-plugin</artifactId>
-    <version>8.0.1</version>
+    <version>8.1.0</version>
     <relativePath />
   </parent>
 
   <artifactId>PickupArrows</artifactId>
-  <version>6.2.5-SNAPSHOT</version>
+  <version>7.0.0-SNAPSHOT</version>
   <name>PickupArrows</name>
   <description>Allows players to pickup arrows from mobs</description>
   <url>https://dev.bukkit.org/projects/pickuparrows</url>
 
   <properties>
+    <jdk.version>21</jdk.version>
+    <java.version>21</java.version>
     <plugin.name>PickupArrows</plugin.name>
     <plugin.main>de.dustplanet.pickuparrows.PickupArrows</plugin.main>
     <plugin.package>de.dustplanet.pickuparrows</plugin.package>
     <powermock.version>2.0.9</powermock.version>
-    <worldedit.version>7.2.15</worldedit.version>
-    <worldguard.version>7.0.9</worldguard.version>
+    <worldedit.version>7.3.2</worldedit.version>
+    <worldguard.version>7.0.10</worldguard.version>
   </properties>
 
   <repositories>
